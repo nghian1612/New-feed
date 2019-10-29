@@ -115,7 +115,7 @@
 										<div class="post-st">
 											<ul>
 												<li><a class="feed_job" href="#" title="">Việc làm</a></li>
-												<li><a class="feed_project" href="#" title="">Chia sẻ dư án</a></li>
+											
 												<li><a class="feed_wh" href="#" title="">Hỏi đáp cộng đồng</a></li>
 											</ul>
 										</div><!--post-st end-->
