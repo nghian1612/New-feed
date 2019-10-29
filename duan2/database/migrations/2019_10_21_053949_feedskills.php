@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Middlefollows extends Migration
+class Feedskills extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class Middlefollows extends Migration
      */
     public function up()
     {
-        Schema::create('middlefollows', function (Blueprint $table) {
+        Schema::create('feedskills', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->bigInteger('id_feed')->unsigned();
+            $table->foreign('id_feed')->references('id')->on('feeds');
+            $table->bigInteger('id_skill')->unsigned();
+            $table->foreign('id_skill')->references('id')->on('skills');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class Middlefollows extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('middlefollows');
+        Schema::dropIfExists('feedskills');
     }
 }

@@ -1,9 +1,9 @@
 @extends('client.layout.master')
 @section('content')
 
-
+@foreach($profile as $pro)
 		<section class="cover-sec">
-			<img src="images/resources/cover-img.jpg" alt="">
+			<img src="images/resources/{{$pro->background}}" alt="">
 		</section>
 
 
@@ -16,33 +16,33 @@
 								<div class="main-left-sidebar">
 									<div class="user_profile">
 										<div class="user-pro-img">
-											<img src="images/resources/user-pro-img.png" alt="">
+											<img src="images/resources/{{$pro->avatar}}" alt="">
 										</div><!--user-pro-img end-->
 										<div class="user_pro_status">
 											<ul class="flw-hr">
-												<li><a href="#" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
-												<li><a href="#" title="" class="hre">Hire</a></li>
+											@if(isset($followon))
+												<li><a href="/client/followon/{{$pro->id}}" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
+											@else
+												<li><a href="/client/followoff/{{$pro->id}}" title="" class="flww"><i class="la la-minus"></i> UnFollow</a></li>
+											@endif	
 											</ul>
 											<ul class="flw-status">
 												<li>
 													<span>Following</span>
-													<b>34</b>
+													
+													<b>{{$countFollowing}}</b>
+													
 												</li>
 												<li>
 													<span>Followers</span>
-													<b>155</b>
+													<b>{{$countFollowed}}</b>
 												</li>
 											</ul>
 										</div><!--user_pro_status end-->
 										<ul class="social_links">
-											<li><a href="#" title=""><i class="la la-globe"></i> www.example.com</a></li>
-											<li><a href="#" title=""><i class="fa fa-facebook-square"></i> Http://www.facebook.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-twitter"></i> Http://www.Twitter.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-google-plus-square"></i> Http://www.googleplus.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-behance-square"></i> Http://www.behance.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-pinterest"></i> Http://www.pinterest.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-instagram"></i> Http://www.instagram.com/john...</a></li>
-											<li><a href="#" title=""><i class="fa fa-youtube"></i> Http://www.youtube.com/john...</a></li>
+										@foreach($externallink as $link)
+											<li><a href="{{$link->link}}" title="">{{$link->link}}</a></li>
+										@endforeach
 										</ul>
 									</div><!--user_profile end-->
 									<div class="suggestions full-width">
@@ -51,57 +51,20 @@
 											<i class="la la-ellipsis-v"></i>
 										</div><!--sd-title end-->
 										<div class="suggestions-list">
-											<div class="suggestion-usd">
-												<img src="images/resources/s1.png" alt="">
+										@foreach($follows as $fol)
+											<a class="suggestion-usd" href="client/profile/{{$fol->id_user}}">
+												<img src="images/resources/{{$fol->user->avatar}}" alt="">
 												<div class="sgt-text">
-													<h4>Jessica William</h4>
-													<span>Graphic Designer</span>
+													<h4>{{$fol->user->name}}</h4>
+													<span>{{$fol->user->title}}</span>
 												</div>
 												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="images/resources/s2.png" alt="">
-												<div class="sgt-text">
-													<h4>John Doe</h4>
-													<span>PHP Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="images/resources/s3.png" alt="">
-												<div class="sgt-text">
-													<h4>Poonam</h4>
-													<span>Wordpress Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="images/resources/s4.png" alt="">
-												<div class="sgt-text">
-													<h4>Bill Gates</h4>
-													<span>C & C++ Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="images/resources/s5.png" alt="">
-												<div class="sgt-text">
-													<h4>Jessica William</h4>
-													<span>Graphic Designer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="images/resources/s6.png" alt="">
-												<div class="sgt-text">
-													<h4>John Doe</h4>
-													<span>PHP Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="view-more">
+											</a>
+										@endforeach
+											
+											<!-- <div class="view-more">
 												<a href="#" title="">View More</a>
-											</div>
+											</div> -->
 										</div><!--suggestions-list end-->
 									</div><!--suggestions end-->
 								</div><!--main-left-sidebar end-->
@@ -109,9 +72,9 @@
 							<div class="col-lg-6">
 								<div class="main-ws-sec">
 									<div class="user-tab-sec">
-										<h3>John Doe</h3>
+										<h3>{{$pro->name}}</h3>
 										<div class="star-descp">
-											<span>Graphic Designer at Self Employed</span>
+											<span>{{$pro->title}}</span>
 											<ul>
 												<li><i class="fa fa-star"></i></li>
 												<li><i class="fa fa-star"></i></li>
@@ -384,28 +347,28 @@
 									</div><!--product-feed-tab end-->
 									<div class="product-feed-tab" id="info-dd">
 										<div class="user-profile-ov">
-											<h3>Overview</h3>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. Nunc eu augue nec arcu efficitur faucibus. Aliquam accumsan ac magna convallis bibendum. Quisque laoreet augue eget augue fermentum scelerisque. Vivamus dignissim mollis est dictum blandit. Nam porta auctor neque sed congue. Nullam rutrum eget ex at maximus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget vestibulum lorem.</p>
+											<h3>GIỚI THIỆU</h3>
+											<p>{{$pro->about_yourself}}</p>
 										</div><!--user-profile-ov end-->
 										<div class="user-profile-ov st2">
-											<h3>Experience</h3>
-											<h4>Web designer</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
-											<h4>UI / UX Designer</h4>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id.</p>
-											<h4>PHP developer</h4>
-											<p class="no-margin">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
+											<h3>KINH NGHIỆM</h3>
+											@foreach($experiences as $exp)
+											<h4>{{$exp->subject}}</h4>
+											<p>{{$exp->detail}}</p>
+											@endforeach
 										</div><!--user-profile-ov end-->
 										<div class="user-profile-ov">
-											<h3>Education</h3>
-											<h4>Master of Computer Science</h4>
-											<span>2015 - 2018</span>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tempor aliquam felis, nec condimentum ipsum commodo id. Vivamus sit amet augue nec urna efficitur tincidunt. Vivamus consectetur aliquam lectus commodo viverra. </p>
+											<h3>HỌC VẤN</h3>
+											@foreach($educations as $edu)
+											<h4>{{$edu->name_school}}</h4>
+											<span>{{$edu->form_time}} - {{$edu->to_time}}</span>
+											<p>{{$edu->description}}</p>
+											@endforeach
 										</div><!--user-profile-ov end-->
 										<div class="user-profile-ov">
-											<h3>Location</h3>
-											<h4>India</h4>
-											<p>151/4 BT Chownk, Delhi </p>
+											<h3>ĐIẠ CHỈ</h3>
+											<!-- <h4>India</h4> -->
+											<p>{{$pro->location}}</p>
 										</div><!--user-profile-ov end-->
 										<div class="user-profile-ov">
 											<h3>Skills</h3>
@@ -527,46 +490,5 @@
 			</div>
 		</main>
 
-
-		<footer>
-			<div class="footy-sec mn no-margin">
-				<div class="container">
-					<ul>
-						<li><a href="help-center.html" title="">Help Center</a></li>
-						<li><a href="about.html" title="">About</a></li>
-						<li><a href="#" title="">Privacy Policy</a></li>
-						<li><a href="#" title="">Community Guidelines</a></li>
-						<li><a href="#" title="">Cookies Policy</a></li>
-						<li><a href="#" title="">Career</a></li>
-						<li><a href="forum.html" title="">Forum</a></li>
-						<li><a href="#" title="">Language</a></li>
-						<li><a href="#" title="">Copyright Policy</a></li>
-					</ul>
-					<p><img src="images/copy-icon2.png" alt="">Copyright 2019</p>
-					<img class="fl-rgt" src="images/logo2.png" alt="">
-				</div>
-			</div>
-		</footer><!--footer end-->
-
-
-		<div class="overview-box" id="create-portfolio">
-			<div class="overview-edit">
-				<h3>Create Portfolio</h3>
-				<form>
-					<input type="text" name="pf-name" placeholder="Portfolio Name">
-					<div class="file-submit">
-						<input type="file" name="file">
-					</div>
-					<div class="pf-img">
-						<img src="images/resources/np.png" alt="">
-					</div>
-					<input type="text" name="website-url" placeholder="htp://www.example.com">
-					<button type="submit" class="save">Save</button>
-					<button type="submit" class="cancel">Cancel</button>
-				</form>
-				<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
-			</div><!--overview-edit end-->
-		</div><!--overview-box end-->
-
-
+@endforeach
 @endsection

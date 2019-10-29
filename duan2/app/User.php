@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     use Notifiable;
 
@@ -51,23 +51,20 @@ class Users extends Model
         return $this -> hasMany('App/Experiences','id_user','id');
     }
 
-    public function skill(){
-        return $this -> hasMany('App/Skills','id_user','id');
+    public function userskill(){
+        return $this -> hasMany('App/Userskills','id_user','id');
     }
 
     public function education(){
         return $this -> hasMany('App/Educations','id_user','id');
     }
 
-    public function middlefollow(){
-        return $this -> hasMany('App/Middlefollows','id_user','id');
+    public function mdfollow(){
+        return $this -> hasMany('App/Follows','id_user','id');
     }
-
-   
     public function follow(){
-        return $this -> belongsTo('App/Follows','id_user','id');
+    	return $this -> hasMany('App\Follows','id_mid','id');
     }
-
 
     public function feed(){
         return $this -> hasMany('App/Feeds','id_user','id');

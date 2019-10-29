@@ -16,14 +16,13 @@ class Feeds extends Migration
         Schema::create('feeds', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('skill');
-            $table->double('salary');
-            $table->string('type_job');
-            $table->double('level_exp');
-            $table->string('location');
-            $table->string('image');
-            $table->text('link_project');
-            $table->text('description');
+            $table->double('salary')->nullable();
+            $table->string('type_job')->nullable();
+            $table->double('level_exp')->nullable();
+            $table->string('location')->nullable();
+            $table->string('image')->nullable();
+            $table->text('link_project')->nullable();
+            $table->text('description')->nullable();
             $table->double('type_feed');
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');

@@ -19,6 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+	
 </head>
 
 <body oncontextmenu="return false;">	
@@ -40,6 +41,7 @@
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
-
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+	@yield('script')
 </body>
 </html>

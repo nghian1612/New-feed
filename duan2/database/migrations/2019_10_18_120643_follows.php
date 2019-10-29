@@ -15,11 +15,10 @@ class Follows extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('status');
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->bigInteger('id_mid')->unsigned();
-            $table->foreign('id_mid')->references('id')->on('middlefollows');
+            $table->foreign('id_mid')->references('id')->on('users');
             $table->timestamps();
         });
     }

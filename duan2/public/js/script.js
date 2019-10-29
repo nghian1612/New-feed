@@ -18,16 +18,16 @@ $(window).on("load", function() {
 
     //  ============= POST JOB POPUP FUNCTION =========
 
-    $(".post-jb").on("click", function(){
-        $(".post-popup.job_post").addClass("active");
-        $(".wrapper").addClass("overlay");
-        return false;
-    });
-    $(".post-project > a").on("click", function(){
-        $(".post-popup.job_post").removeClass("active");
-        $(".wrapper").removeClass("overlay");
-        return false;
-    });
+    // $(".post-jb").on("click", function(){
+    //     $(".post-popup.job_post").addClass("active");
+    //     $(".wrapper").addClass("overlay");
+    //     return false;
+    // });
+    // $(".post-project > a").on("click", function(){
+    //     $(".post-popup.job_post").removeClass("active");
+    //     $(".wrapper").removeClass("overlay");
+    //     return false;
+    // });
 
     //  ============= SIGNIN CONTROL FUNCTION =========
 
@@ -84,16 +84,16 @@ $(window).on("load", function() {
 
     //  ============= EXPERIENCE EDIT FUNCTION =========
 
-    $(".exp-bx-open").on("click", function(){
-        $("#experience-box").addClass("open");
-        $(".wrapper").addClass("overlay");
-        return false;
-    });
-    $(".close-box").on("click", function(){
-        $("#experience-box").removeClass("open");
-        $(".wrapper").removeClass("overlay");
-        return false;
-    });
+    // $(".exp-bx-open").on("click", function(){
+    //     $("#experience-box").addClass("open");
+    //     $(".wrapper").addClass("overlay");
+    //     return false;
+    // });
+    // $(".close-box").on("click", function(){
+    //     $("#experience-box").removeClass("open");
+    //     $(".wrapper").removeClass("overlay");
+    //     return false;
+    // });
 
     //  ============= EDUCATION EDIT FUNCTION =========
 

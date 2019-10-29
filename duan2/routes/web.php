@@ -29,6 +29,12 @@ Route::group(['prefix'=>'client', 'middleware'=>'clientlogin'],function(){
     Route::get('companies','companiesController@show');
     Route::get('job','jobController@show');
     Route::post('updateabout','profileController@updateabout');
+    Route::get('followon/{id}','profileController@followon');
+    Route::get('followoff/{id}','profileController@followoff');
+    Route::get('ajax/exp/{idExp}','profileController@getexp');
+    Route::post('addexp','profileController@addExp');
+    Route::post('updateexp','profileController@updateExp');
+    Route::get('deleteexp/{id}','profileController@deleteExp');
 });
 
 

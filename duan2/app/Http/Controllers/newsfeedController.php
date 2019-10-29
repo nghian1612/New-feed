@@ -12,7 +12,8 @@ class newsfeedController extends Controller
         if(Auth::id() == $id){
             $profile = User::where('id',$id)->get();
             return view('client.newsfeed',['profile'=>$profile]);
-        }else{
+        }
+        else{
             $id = Auth::id();
             return redirect()->route('newsfeed',['id'=> $id]);
         }
