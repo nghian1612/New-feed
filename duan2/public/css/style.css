@@ -2246,6 +2246,9 @@ select {
 	-o-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
+.sn-field > .fa{
+	left:90%;
+}
 /* i.field-icon  {
     width: 90%;
 	text-align: end;
@@ -2358,7 +2361,7 @@ select {
 	color: #000000;
 	font-size: 14px;
 	font-weight: 500;
-	margin-left: 10px;
+	margin:0 10px;
 }
 .checky-sec > a {
 	float: right;
