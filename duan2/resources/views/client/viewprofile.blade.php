@@ -1,6 +1,6 @@
 @extends('client.layout.master')
 @section('content')
-
+{{Auth::id()}}
 @foreach($profile as $pro)
 		<section class="cover-sec">
 			<img src="images/resources/{{$pro->background}}" alt="">

@@ -16,10 +16,9 @@ class Educations extends Migration
         Schema::create('educations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_school');
-            $table->date('form_time');
-            $table->date('to_time');
             $table->string('career');
-            $table->text('description');
+            $table->tinyInteger('graduated')->nullable();
+            $table->text('description')->nullable();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
