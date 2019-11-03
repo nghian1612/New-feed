@@ -388,20 +388,18 @@
 									@endforeach
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
-									<h3><a href="#" title="" class="skills-open">KỸ NĂNG</a> <a href="#" title="" class="skills-open"><i class="fa fa-pencil"></i></a> <a href="#"><i class="fa fa-plus-square"></i></a></h3>
+									<h3>KỸ NĂNG <a href="#" class="skills-open"><i class="fa fa-plus-square"></i></a></h3>
 									<ul>
-										<li><a href="#" title="">HTML</a></li>
-										<li><a href="#" title="">PHP</a></li>
-										<li><a href="#" title="">CSS</a></li>
-										<li><a href="#" title="">Javascript</a></li>
-										<li><a href="#" title="">Wordpress</a></li>
-										<li><a href="#" title="">Photoshop</a></li>
-										<li><a href="#" title="">Illustrator</a></li>
-										<li><a href="#" title="">Corel Draw</a></li>
+									@foreach($userskill as $skill)
+										<li style='position:relative; padding-right:10px;'>
+											<a href="#" title="" style="">{{$skill->skill->name}}</a>
+											<a href="/client/deleteski/{{$skill->id}}" title="" style="position:absolute; right:0; top:-10px ;background:#bbb;padding:3px;border:1px solid #ccc; border-radius:50%"><i class="la la-close" style="padding-left:0px; font-size:14px;" ></i></a>
+										</li>
+									@endforeach
 									</ul>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
-									<h3><a href="#" title="" class="lct-box-open">Liên hệ</a> <a href="#" title="" class="lct-box-open"><i class="fa fa-pencil"></i></a></h3>
+									<h3>Liên hệ<a href="#" title="" class="lct-box-open"><i class="fa fa-pencil"></i></a></h3>
 									<!-- <h4>India</h4> -->
 									<p>{!!$pro->location!!} </p>
 								</div><!--user-profile-ov end-->
@@ -561,7 +559,6 @@
 			<input type="hidden" name="id" value="{{$pro->id}}">
 			<textarea name="location" placeholder="Liên hệ" id="editor-location-update"></textarea>
 			<button type="submit" class="save">Save</button>
-			
 		</form>
 		<a title="" class="close-box"><i class="la la-close"></i></a>
 	</div><!--overview-edit end-->
@@ -573,16 +570,11 @@
 <div class="overview-box" id="skills-box">
 	<div class="overview-edit">
 		<h3>Skills</h3>
-		<ul>
-			<li><a href="#" title="" class="skl-name">HTML</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-			<li><a href="#" title="" class="skl-name">php</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-			<li><a href="#" title="" class="skl-name">css</a><a href="#" title="" class="close-skl"><i class="la la-close"></i></a></li>
-		</ul>
-		<form>
+		<form action="{{url('/client/addski')}}" method="post">
+			<input type="hidden" value="{{csrf_token()}}" name="_token">
 			<input type="text" name="skills" placeholder="Skills">
 			<button type="submit" class="save">Save</button>
-			<button type="submit" class="save-add">Save & Add More</button>
-			<button type="submit" class="cancel">Cancel</button>
+			<button type="button" class="cancel">Cancel</button>
 		</form>
 		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
 	</div><!--overview-edit end-->
@@ -595,7 +587,7 @@
 	<div class="post-project">
 		<h3>Đăng việc làm</h3>
 		<div class="post-project-fields">
-			<form>
+			<form autocomplete="off">
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="text" name="title" placeholder="Tiêu đề">
@@ -603,8 +595,13 @@
 					<div class="col-lg-12">
 						<input type="text" name="location" placeholder="Địa chỉ làm việc">
 					</div>
+					
+					<div id="skills_changed"></div>
+					
 					<div class="col-lg-12">
-						<input type="text" name="skills" placeholder="Kỹ năng cần có">
+						<input type="text" name="skills" placeholder="Kỹ năng cần có" id="country_name">
+						<div id="countryList"></div>
+						{{ csrf_field() }}
 					</div>
 					<div class="col-lg-6">
 						<div class="price-br">
@@ -1176,45 +1173,46 @@
 // Create ckeditor for form
 CKEDITOR.replace( 'editor-about-update' );
 CKEDITOR.replace( 'editor-location-update' );
+// CKEDITOR.replace( 'editor-feed-add' );
 // Create ckeditor for form
 
 
 // Begin Action form EXp
-	$(document).ready(function(){
-		$(".exp-bx-open").on("click", function(){
-			var idExp = $(this).val();
-			alert (idExp);
-			$.get("client/ajax/exp/"+idExp, function(data){
-				$("#experience-box").addClass("open");
-				$("#experience-box").html(data);
-				$(".wrapper").addClass("overlay");
-				CKEDITOR.replace( 'editor-exp-update' );
-
-				$(".close-box").on("click", function(){
-					$("#experience-box").removeClass("open");
-					$(".wrapper").removeClass("overlay");
-				});
-				$(".cancel").on("click", function(){
-					$("#experience-box").removeClass("open");
-					$(".wrapper").removeClass("overlay");
-				});
-			});
-		});
-		$(".exp-bx-open-add").on("click", function(){
-			$("#experience-box-add").addClass("open");
+$(document).ready(function(){
+	$(".exp-bx-open").on("click", function(){
+		var idExp = $(this).val();
+		alert (idExp);
+		$.get("client/ajax/exp/"+idExp, function(data){
+			$("#experience-box").addClass("open");
+			$("#experience-box").html(data);
 			$(".wrapper").addClass("overlay");
-			CKEDITOR.replace( 'editor-exp-insert' );
+			CKEDITOR.replace( 'editor-exp-update' );
 
 			$(".close-box").on("click", function(){
-				$("#experience-box-add").removeClass("open");
+				$("#experience-box").removeClass("open");
 				$(".wrapper").removeClass("overlay");
 			});
 			$(".cancel").on("click", function(){
-				$("#experience-box-add").removeClass("open");
+				$("#experience-box").removeClass("open");
 				$(".wrapper").removeClass("overlay");
 			});
 		});
 	});
+	$(".exp-bx-open-add").on("click", function(){
+		$("#experience-box-add").addClass("open");
+		$(".wrapper").addClass("overlay");
+		CKEDITOR.replace( 'editor-exp-insert' );
+
+		$(".close-box").on("click", function(){
+			$("#experience-box-add").removeClass("open");
+			$(".wrapper").removeClass("overlay");
+		});
+		$(".cancel").on("click", function(){
+			$("#experience-box-add").removeClass("open");
+			$(".wrapper").removeClass("overlay");
+		});
+	});
+});
 // End Action Exp
 
 // Begin Action form Education
@@ -1254,6 +1252,52 @@ $(document).ready(function(){
 		});
 	});
 // End Action form Education
+
+
+$(document).ready(function(){
+	$('#country_name').keyup(function(){ //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
+ 		var query = $(this).val(); //lấy gía trị ng dùng gõ
+ 		if(query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
+		{
+			var _token = $('input[name="_token"]').val(); // token để mã hóa dữ liệu
+			$.ajax({
+				url:"{{ route('search') }}", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+				method:"POST", // phương thức gửi dữ liệu.
+				data:{query:query, _token:_token},
+				success:function(data){ //dữ liệu nhận về
+					$('#countryList').fadeIn();  
+					$('#countryList').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
+				}
+			});
+		}
+
+		$(document).on('click', 'li', function(){
+			console.log(data);
+			$('#country_name').val($(this).text());
+			$('#countryList').fadeOut();  
+		});  
+	});
+
+	// $(document).on('click', 'li', function(){  
+	// 	$('#country_name').val($(this).text());
+	// 	console.log(data);
+		// var feedskill = {
+		// 	id :function(){
+		// 		$('#idskill').val();
+		// 	},
+		// 	fskill :function(){
+		// 		$('#fskill').val();
+		// 	}
+		// };
+		//feedskill.push($(this));
+		//$('#skills_changed').html('<a class="fskill">'.$row->name.'</a><span style="display:none" id="idskill">'. $row->id .'</span>')
+ 		// $('#countryList').fadeOut();  
+	// });  
+});
+
+//skills_changed
+
+
 
 $(".feed_job").on("click", function(){
 	$(".post-popup.job_post").addClass("active");

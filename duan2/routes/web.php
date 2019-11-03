@@ -45,6 +45,12 @@ Route::group(['prefix'=>'client', 'middleware'=>'clientlogin'],function(){
     Route::post('addedu','profileController@addEdu');
     Route::post('updateedu','profileController@updateEdu');
     Route::get('deleteedu/{id}','profileController@deleteEdu');
+
+    Route::post('addski','profileController@addSki');
+    Route::get('deleteski/{id}','profileController@deleteSki');
+
+
+    Route::post('search/name','profileController@searchskillAjax')->name('search');
 });
 
 
