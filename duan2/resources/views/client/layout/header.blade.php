@@ -1,13 +1,16 @@
 @if(Auth::check())
+	@if(isset($products))
+		{{"co bien user"}}
+	@endif
 <header>
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
 						<a href="client/profile/{{Auth::id()}}" title=""><img src="images/logo.png" alt=""></a>
 					</div><!--logo end-->
-					<div class="search-bar">
-						<form>
-							<input type="text" name="search" placeholder="Search...">
+					<div class="search-bar" style="position:relative;">
+						<form autocomplete="off">
+							<input type="text" id="search" name="search" placeholder="Search...">
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div><!--search-bar end-->

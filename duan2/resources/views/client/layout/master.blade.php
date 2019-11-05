@@ -30,7 +30,7 @@
     @yield('content')
     @include('client.layout.footer')
 
-	</div><!--theme-layout end-->
+	</div>
 
 
 
@@ -41,7 +41,9 @@
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/scrollbar.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/show-hide-pass.js"></script>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
 	@yield('script')
 </body>
 </html>

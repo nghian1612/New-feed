@@ -20,7 +20,11 @@
 </head>
 
 
+<<<<<<< HEAD
 <body class="sign-in" >
+=======
+<body class="sign-in">
+>>>>>>> 26b518c895d67dbe81b0030564c87deee4c32845
 	
 
 	<div class="wrapper">		
@@ -61,13 +65,15 @@
 											</div>
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="password" name="password" placeholder="Password">
+													<input class="password" type="password" name="password" placeholder="Password">
+													<i toggle=".password" class=" toggle-password fa fa-eye-slash"></i>
 													<i class="la la-lock"></i>
 												</div>
 											</div>
                                             <div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="password" name="repassword" placeholder="Re-Password">
+													<input class="password" type="password" name="repassword" placeholder="Re-Password">
+													<i toggle=".password" class="toggle-password fa fa-eye-slash"></i>
 													<i class="la la-lock"></i>
 												</div>
 											</div>

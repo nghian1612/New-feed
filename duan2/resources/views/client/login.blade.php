@@ -21,7 +21,10 @@
 
 
 <body class="sign-in">
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 26b518c895d67dbe81b0030564c87deee4c32845
 
 	<div class="wrapper">		
 
@@ -55,7 +58,8 @@
 											</div>
 											<div class="col-lg-12 no-pdd">
 												<div class="sn-field">
-													<input type="password" name="password" placeholder="Password">
+													<input class="password" type="password" name="password" placeholder="Password">
+													<i toggle=".password" class="toggle-password fa fa-eye-slash"></i>
 													<i class="la la-lock"></i>
 												</div>
 											</div>
@@ -74,7 +78,7 @@
 											<div class="col-lg-12 no-pdd">
 												<button type="submit" value="submit">Sign in</button>
 											</div>
-											<div class="col-lg-12 no-pdd">
+											<div class="col-lg-12 no-pdd mt-3">
 												<!-- Thông báo lỗi khi đăng nhập -->
 												
 													@if(count($errors) > 0)
@@ -92,14 +96,9 @@
 													@endif
 												
 											</div>
-											<div class="col-lg-12 no-pdd ">
+											<div class="col-lg-12 no-pdd">
 												<a href="register" title="">Bạn chưa có tài khoản?</a>
 											</div>
-
-										
-									
-
-
 										</div>
 
 									</form>
@@ -155,5 +154,6 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/slick/slick.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+
 </body>
 </html>
