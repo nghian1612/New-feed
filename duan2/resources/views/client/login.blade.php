@@ -20,7 +20,7 @@
 </head>
 
 
-<body class="sign-in" oncontextmenu="return false;">
+<body class="sign-in">
 	
 
 	<div class="wrapper">		
