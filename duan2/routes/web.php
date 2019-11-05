@@ -28,13 +28,29 @@ Route::group(['prefix'=>'client', 'middleware'=>'clientlogin'],function(){
     Route::get('allprofile','allprofileController@show');
     Route::get('companies','companiesController@show');
     Route::get('job','jobController@show');
+    
     Route::post('updateabout','profileController@updateabout');
+    Route::post('updatelocation','profileController@updatelocation');
+    Route::post('updatestalish','profileController@updatestalish');
+
     Route::get('followon/{id}','profileController@followon');
     Route::get('followoff/{id}','profileController@followoff');
+
     Route::get('ajax/exp/{idExp}','profileController@getexp');
     Route::post('addexp','profileController@addExp');
     Route::post('updateexp','profileController@updateExp');
     Route::get('deleteexp/{id}','profileController@deleteExp');
+
+    Route::get('ajax/edu/{idEdu}','profileController@getedu');
+    Route::post('addedu','profileController@addEdu');
+    Route::post('updateedu','profileController@updateEdu');
+    Route::get('deleteedu/{id}','profileController@deleteEdu');
+
+    Route::post('addski','profileController@addSki');
+    Route::get('deleteski/{id}','profileController@deleteSki');
+
+
+    Route::post('search/name','profileController@searchskillAjax')->name('search');
 });
 
 

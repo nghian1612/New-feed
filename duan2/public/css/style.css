@@ -276,6 +276,7 @@ header {
 .header-data {
 	float: left;
 	width: 100%;
+	margin-top: 10px;
 }
 .logo {
 	float: left;
@@ -358,7 +359,7 @@ header {
 }
 .search-bar {
 	float: left;
-	width: 280px;
+	width: 380px;
 	margin-top: 9px;
 }
 .search-bar form {
@@ -393,7 +394,7 @@ header {
 
 nav {
 	float: left;
-	width: 60%;
+	width: 50%;
 	text-align: right;
 	padding-right: 13px;
 }
@@ -537,10 +538,7 @@ nav > ul > li > a:hover {
 
 .user-account {
 	float: right;
-	width: 110px;
-	border-left: 1px solid #ffffff;
-	border-right: 1px solid #fdfdfd;
-	box-sizing: border-box;
+	width: 120px;
 	position: relative;
 }
 .user-info {
@@ -689,6 +687,9 @@ nav > ul > li > a:hover {
 	font-size: 14px;
 	float: left;
 	margin-top: 8px;
+	overflow: hidden;
+    white-space: nowrap;
+    width: 40px;
 }
 .user-info a:hover {
 	color: #fff;

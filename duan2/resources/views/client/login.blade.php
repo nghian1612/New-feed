@@ -20,8 +20,7 @@
 </head>
 
 
-<body class="sign-in" oncontextmenu="return false;">
-	
+<body class="sign-in">
 
 	<div class="wrapper">		
 
@@ -75,7 +74,7 @@
 											<div class="col-lg-12 no-pdd">
 												<button type="submit" value="submit">Sign in</button>
 											</div>
-											<div class="col-lg-12 no-pdd">
+											<div class="col-lg-12 no-pdd mt-3">
 												<!-- Thông báo lỗi khi đăng nhập -->
 												
 													@if(count($errors) > 0)
@@ -93,7 +92,7 @@
 													@endif
 												
 											</div>
-											<div class="col-lg-12 no-pdd ">
+											<div class="col-lg-12 no-pdd">
 												<a href="register" title="">Bạn chưa có tài khoản?</a>
 											</div>
 										</div>
