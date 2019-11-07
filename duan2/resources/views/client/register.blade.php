@@ -20,11 +20,7 @@
 </head>
 
 
-<<<<<<< HEAD
-<body class="sign-in" >
-=======
 <body class="sign-in">
->>>>>>> 26b518c895d67dbe81b0030564c87deee4c32845
 	
 
 	<div class="wrapper">		

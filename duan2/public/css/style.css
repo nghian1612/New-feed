@@ -855,7 +855,6 @@ main {
 	padding: 15px 20px;
 }
 .suggestion-usd img {
-	width: 15%;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
@@ -863,7 +862,6 @@ main {
 	border-radius: 100px;
 }
 .sgt-text {
-	width: 70%;
 	float: left;
 	padding-left: 10px;
 }
@@ -894,7 +892,7 @@ main {
 	cursor: pointer;
 }
 .suggestion-usd > span i:hover {
-	background-color: #51a5fb;
+	background-color: #e44d3a;
 	color: #fff;
 	border-radius: 3px;
 }
@@ -910,7 +908,7 @@ main {
 	font-weight: 700;
 }
 .view-more > a:hover {
-	color: #51a5fb;
+	color: #e44d3a;
 }
 
 
@@ -1067,7 +1065,6 @@ main {
 	float: left;
 }
 .usy-dt img {
-	width: 15%;
 	-webkit-border-radius: 100px;
 	-moz-border-radius: 100px;
 	-ms-border-radius: 100px;
@@ -2656,7 +2653,7 @@ footer {
 .add-dp i:hover {
 	font-size: 14px;
 	border: 2px solid #fff;
-    background: #51a5fb;
+    background: #e44d3a;
 	padding: 11px;
 }
 .add-dp {
@@ -2812,7 +2809,7 @@ footer {
 .star-descp {
 	float: left;
 	width: 100%;
-	margin: 10px 0px;
+	margin-bottom: 10px;
 }
 .star-descp ul li{
 	margin-right: 5px!important;
@@ -2829,10 +2826,11 @@ footer {
 	color: #51a5fb;
 }
 .star-descp span {
+	float: left;
 	color: #686868;
 	font-size: 18px;
 	font-weight: 600;
-	text-align: center;
+	margin-right: 20px;
 }
 .star-descp > ul {
 	float: left;
@@ -2996,9 +2994,6 @@ footer {
 	color: #000;
 	font-weight: 600;
 	margin-bottom: 10px;
-}
-.user-profile-ov button {
-	margin: 10px;
 }
 .user-profile-ov p {
 	color: #686868;

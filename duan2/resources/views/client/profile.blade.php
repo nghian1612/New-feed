@@ -16,13 +16,11 @@
 		</div>
 	</div>
 </section>
-
 <main>
 	<div class="main-section">
 		<div class="container">
 			<div class="main-section-data">
 				<div class="row">
-
 					<div class="col-lg-3">
 						<div class="main-left-sidebar">
 							<div class="user_profile">
@@ -30,7 +28,7 @@
 									<img src="images/resources/{{$pro->avatar}}" alt="">
 									<div class="add-dp" id="OpenImgUpload">
 										<input type="file" id="file">
-									<label for="file"><i class="fas fa-camera"></i></label>												
+										<label for="file"><i class="fas fa-camera"></i></label>												
 									</div>
 								</div><!--user-pro-img end-->
 								<h3>{{$pro->name}}</h3>
@@ -51,9 +49,7 @@
 								</div><!--user_pro_status end-->
 								<ul class="social_links">
 									@foreach($externallink as $link)
-									<li>
-										<a href="{{$link->link}}" title=""> {{$link->link}}</a>
-									</li>
+									<li><a href="{{$link->link}}" title=""> {{$link->link}}</a></li>
 									<!-- <li><a href="" title=""><i class="la la-globe"></i></a></li> -->
 									@endforeach
 									
@@ -139,8 +135,8 @@
 											<div class="ed-opts">
 												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
 												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Delete Post</a></li>
+													<li><a href="#" title="">Chỉnh sửa</a></li>
+													<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
 												</ul>
 											</div>
 										</div>
@@ -149,10 +145,10 @@
 												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
 												<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
 											</ul>
-											<ul class="bk-links">
+											<!-- <ul class="bk-links">
 												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
 												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
+											</ul> -->
 										</div>
 										<div class="job_descp">
 											<h3>{{$mfeed->title}}</h3>
@@ -164,19 +160,19 @@
 												@endif
 												<li><span>{{$mfeed->salary}}đ / tháng</span></li>
 											</ul>
-											<p>{{$mfeed->description}}<br><a href="#" title="">view more</a></p>
+											<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
 											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
+												@foreach($feedskill as $fskill)
+												@if($fskill->id_feed == $mfeed->id)
+												<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+												@endif
+												@endforeach	
 											</ul>
 										</div>
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
 													<img src="images/liked-img.png" alt="">
 													<span>25</span>
 												</li> 
@@ -184,27 +180,7 @@
 											</ul>
 											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
 										</div>
-										<!-- <div class="comment-content close">
-											<div class="post_topbar post-reply">
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">
-													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
-												</div>
-											</div>
-										</div> -->
+										
 									</div><!--post-bar end-->
 									@elseif($mfeed->type_feed == 2)
 									<div class="post-bar">
@@ -219,36 +195,33 @@
 											<div class="ed-opts">
 												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
 												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
+													<li><a href="#" title="">Chỉnh sửa</a></li>
+													<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
 												</ul>
 											</div>
 										</div>
-										<div class="epi-sec">
+										<!-- <div class="epi-sec">
 											<ul class="bk-links">
 												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
 												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
 											</ul>
-										</div>
+										</div> -->
 										<div class="job_descp">
 											<h3>{{$mfeed->title}}</h3>
-											<p>{{$mfeed->description}}<br><a href="{{$mfeed->link_project}}" title="" target="blank">{{$mfeed->link_project}}</a></p>
+											<p>{{$mfeed->description}}</p>
 											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
+												@foreach($feedskill as $fskill)
+												@if($fskill->id_feed == $mfeed->id)
+												<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+												@endif
+												@endforeach		
 											</ul>
-											<img src="images/resources/{{$mfeed->image}}" alt="">
+											<img src="images/feedimage/{{$mfeed->image}}" alt="">
 										</div>
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
 													<img src="images/liked-img.png" alt="">
 													<span>25</span>
 												</li> 
@@ -256,98 +229,7 @@
 											</ul>
 											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
 										</div>
-										<!-- <div class="comment-content close">
-											<div class="post_topbar post-reply">
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">
-													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
-												</div>
-											</div>
-										</div> -->
-									</div><!--post-bar end-->
-									@elseif($mfeed->type_feed == 3)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<p>{{$mfeed->description}}<br><a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										<!-- <div class="comment-content">
-											<div class="post_topbar post-reply">
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">
-													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
-												</div>
-											</div>
-										</div> -->
+										
 									</div><!--post-bar end-->
 									@endif
 								@endforeach
@@ -525,7 +407,7 @@
 			<textarea name="description" placeholder="Description" id="editor-edu-insert"></textarea>
 			<input type="checkbox" name="graduated" value="1"><span>Đã tốt nghiệp</span>
 			<button type="submit" class="save">Save</button>
-			<button type="submit" class="cancel">Cancel</button>
+			<button class="cancel">Cancel</button>
 		</form>
 		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
 	</div><!--overview-edit end-->
@@ -589,18 +471,21 @@
 	<div class="post-project">
 		<h3>Đăng việc làm</h3>
 		<div class="post-project-fields">
-			<form autocomplete="off">
+			<form autocomplete="off" action="{{url('/client/addjob')}}" method="post">
+				<input type="hidden" value="{{csrf_token()}}" name="_token">
+				<input type="hidden" name="type_feed" value="1">
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="text" name="title" placeholder="Tiêu đề">
 					</div>
-					<div class="col-lg-12">
+					<div class="col-lg-6">
 						<input type="text" name="location" placeholder="Địa chỉ làm việc">
 					</div>
-					
-					<div id="skills_changed"></div>
-					
+					<div class="col-lg-6">
+						<input type="number" name="level" placeholder="số năm kinh nghiệp">
+					</div>
 					<div class="col-lg-12">
+						<ul id="skills_changed"></ul>
 						<input type="text" name="skills" placeholder="Kỹ năng cần có" id="country_name">
 						<div id="countryList"></div>
 						{{ csrf_field() }}
@@ -620,12 +505,12 @@
 						</div>
 					</div>
 					<div class="col-lg-12">
-						<textarea name="description" placeholder="Chi tiết công việc"></textarea>
+						<textarea name="description" id="editor-feed-add" placeholder="Chi tiết công việc"></textarea>
 					</div>
 					<div class="col-lg-12">
 						<ul>
 							<li><button class="active" type="submit" value="post">Đăng bài</button></li>
-							<li><a href="#" title="">Hủy</a></li>
+							<li><a title="" id="an">Hủy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -636,66 +521,37 @@
 </div>
 <!-- Form feed job -->
 
-<!-- Form feed project -->
-<div class="post-popup project_post">
-	<div class="post-project">
-		<h3>Chia sẽ dự án</h3>
-		<div class="post-project-fields">
-			<form>
-				<div class="row">
-					<div class="col-lg-12">
-						<input type="text" name="title" placeholder="Tiêu đề">
-					</div>
-					<div class="col-lg-12">
-						<input type="text" name="link" placeholder="Đường dẫn tới dự án(nếu có)">
-					</div>
-					<div class="col-lg-12">
-						<input type="text" name="skills" placeholder="Kỹ năng cần có">
-					</div>
-					<div class="col-lg-6">
-						<div class="file-submit">
-							<input type="file" id="file">
-							<label for="file">Choose File</label>	
-						</div>
-					</div>
-					<div class="col-lg-12">
-						<textarea name="description" placeholder="Mô tả dự án"></textarea>
-					</div>
-					<div class="col-lg-12">
-						<ul>
-							<li><button class="active" type="submit" value="post">Đăng bài</button></li>
-							<li><a href="#" title="">Hủy</a></li>
-						</ul>
-					</div>
-				</div>
-			</form>
-		</div><!--post-project-fields end-->
-		<a href="#" title=""><i class="la la-times-circle-o"></i></a>
-	</div>
-</div>
-<!-- Form feed project -->
-
 
 <!-- Form feed project -->
 <div class="post-popup wh_post">
 	<div class="post-project">
-		<h3>Hỏi đáp cộng đồng</h3>
+		<h3>Chia sẻ cộng đồng</h3>
 		<div class="post-project-fields">
-			<form>
+			<form autocomplete="off" action="{{url('/client/addjob')}}" method="post" enctype="multipart/form-data">
+				<input type="hidden" value="{{csrf_token()}}" name="_token">
+				<input type="hidden" name="type_feed" value="2">
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="text" name="title" placeholder="Tiêu đề">
 					</div>
 					<div class="col-lg-12">
-						<input type="text" name="skills" placeholder="Kỹ năng liên quan">
+						<ul id="skills_changed_1"></ul>
+						<input type="text" name="skills" placeholder="Kỹ năng liên quan" id="country_name_1">
+						<div id="countryList_1"></div>
+						{{ csrf_field() }}
 					</div>
 					<div class="col-lg-12">
-						<textarea name="description" placeholder="Chi tiết"></textarea>
+						
+							<input type="file" name="hinh" id="file">
+						
+					</div>
+					<div class="col-lg-12">
+						<textarea name="description" id="editor-feed-add-1" placeholder="Chi tiết"></textarea>
 					</div>
 					<div class="col-lg-12">
 						<ul>
 							<li><button class="active" type="submit" value="post">Đăng bài</button></li>
-							<li><a href="#" title="">Hủy</a></li>
+							<li><a title="" id="an_1">Hủy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -783,9 +639,7 @@
 								</div><!--user_pro_status end-->
 								<ul class="social_links">
 									@foreach($externallink as $link)
-									<li>
-										<a href="{{$link->link}}" title=""> {{$link->link}}</a>
-									</li>
+									<li><a href="{{$link->link}}" title=""> {{$link->link}}</a></li>
 									<!-- <li><a href="" title=""><i class="la la-globe"></i></a></li> -->
 									@endforeach
 									
@@ -1177,6 +1031,8 @@
 // Create ckeditor for form
 CKEDITOR.replace( 'editor-about-update' );
 CKEDITOR.replace( 'editor-location-update' );
+CKEDITOR.replace( 'editor-feed-add' );
+CKEDITOR.replace( 'editor-feed-add-1' );
 // CKEDITOR.replace( 'editor-feed-add' );
 // Create ckeditor for form
 
@@ -1257,12 +1113,13 @@ $(document).ready(function(){
 	});
 // End Action form Education
 
-
+// Begin Action form feedjob
 $(document).ready(function(){
 	$('#country_name').keyup(function(){ //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
  		var query = $(this).val(); //lấy gía trị ng dùng gõ
  		if(query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
-		{
+		{	
+			console.log(query);
 			var _token = $('input[name="_token"]').val(); // token để mã hóa dữ liệu
 			$.ajax({
 				url:"{{ route('search') }}", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
@@ -1274,34 +1131,33 @@ $(document).ready(function(){
 				}
 			});
 		}
-
-		$(document).on('click', 'li', function(){
-			console.log(data);
-			$('#country_name').val($(this).text());
-			$('#countryList').fadeOut();  
-		});  
 	});
-
-	// $(document).on('click', 'li', function(){  
-	// 	$('#country_name').val($(this).text());
-	// 	console.log(data);
-		// var feedskill = {
-		// 	id :function(){
-		// 		$('#idskill').val();
-		// 	},
-		// 	fskill :function(){
-		// 		$('#fskill').val();
-		// 	}
-		// };
-		//feedskill.push($(this));
-		//$('#skills_changed').html('<a class="fskill">'.$row->name.'</a><span style="display:none" id="idskill">'. $row->id .'</span>')
- 		// $('#countryList').fadeOut();  
-	// });  
+	var grpskill = [];
+	$(document).on('click', '.w-skill', function(){
+		$('#country_name').val($(this).text());
+		$('#countryList').fadeOut();  
+		console.log($('#country_name').val());
+		var skill = $('#country_name').val();
+		grpskill.push(skill);
+		console.log(grpskill);
+		$('#skills_changed').append('<li class="w-skillch"><input type="checkbox" name="grpskill[]" value="'+skill+'" checked="checked"></li>');
+		return grpskill;
+	}); 
+	$(document).on('click', '.w-skillch', function(){
+		var skill = $(this).text();
+		var i = grpskill.indexOf(skill);
+		if (i != -1) {
+			grpskill.splice(i,1);
+			console.log(grpskill);
+			return grpskill;
+		}
+		$($(this)).remove();	
+	});
+	$(document).on('click','#an',function(){
+		$(".post-popup.job_post").removeClass("active");
+		$(".wrapper").removeClass("overlay");
+	});
 });
-
-//skills_changed
-
-
 
 $(".feed_job").on("click", function(){
 	$(".post-popup.job_post").addClass("active");
@@ -1313,19 +1169,54 @@ $(".post-project > a").on("click", function(){
 	$(".wrapper").removeClass("overlay");
 	return false;
 });
+// End Action form feedjob
 
 
-$(".feed_project").on("click", function(){
-	$(".post-popup.project_post").addClass("active");
-	$(".wrapper").addClass("overlay");
-	return false;
+// Begin Action form feedshare
+$(document).ready(function(){
+	$('#country_name_1').keyup(function(){ //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
+ 		var query = $(this).val(); //lấy gía trị ng dùng gõ
+ 		if(query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
+		{	
+			console.log(query);
+			var _token = $('input[name="_token"]').val(); // token để mã hóa dữ liệu
+			$.ajax({
+				url:"{{ route('search') }}", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
+				method:"POST", // phương thức gửi dữ liệu.
+				data:{query:query, _token:_token},
+				success:function(data){ //dữ liệu nhận về
+					$('#countryList_1').fadeIn();  
+					$('#countryList_1').html(data); //nhận dữ liệu dạng html và gán vào cặp thẻ có id là countryList
+				}
+			});
+		}
+	});
+	var grpskill = [];
+	$(document).on('click', '.w-skill', function(){
+		$('#country_name_1').val($(this).text());
+		$('#countryList_1').fadeOut();  
+		console.log($('#country_name_1').val());
+		var skill = $('#country_name_1').val();
+		grpskill.push(skill);
+		console.log(grpskill);
+		$('#skills_changed_1').append('<li class="w-skillch"><input type="checkbox" name="grpskill[]" value="'+skill+'" checked="checked"></li>');
+		return grpskill;
+	}); 
+	$(document).on('click', '.w-skillch', function(){
+		var skill = $(this).text();
+		var i = grpskill.indexOf(skill);
+		if (i != -1) {
+			grpskill.splice(i,1);
+			console.log(grpskill);
+			return grpskill;
+		}
+		$($(this)).remove();	
+	});
+	$(document).on('click','#an_1',function(){
+		$(".post-popup.wh_post").removeClass("active");
+		$(".wrapper").removeClass("overlay");
+	});
 });
-$(".post-project > a").on("click", function(){
-	$(".post-popup.project_post").removeClass("active");
-	$(".wrapper").removeClass("overlay");
-	return false;
-});
-
 $(".feed_wh").on("click", function(){
 	$(".post-popup.wh_post").addClass("active");
 	$(".wrapper").addClass("overlay");
@@ -1336,20 +1227,8 @@ $(".post-project > a").on("click", function(){
 	$(".wrapper").removeClass("overlay");
 	return false;
 });
+// End Action form feedshare
 
-
-
-
-// $(".com").on("click", function(){
-// 	$(".comment-content").removeClass("close");
-// 	$(".comment-content").addClass("open");
-// 	return false;
-// });
-// $(".post-project > a").on("click", function(){
-// 	$(".post-popup.wh_post").removeClass("active");
-// 	$(".wrapper").removeClass("overlay");
-// 	return false;
-// });
 
 </script>
 @endsection

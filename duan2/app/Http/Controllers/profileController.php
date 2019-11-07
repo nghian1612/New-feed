@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Experiences;
 use App\Educations;
 use App\Externallinks;
 use App\Follows;
-use App\Mdfollows;
 use App\Skills;
 use App\Userskills;
 use App\Feeds;
 use App\Types;
 use App\Catalogs;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
+use App\Feedskills;
+
 
 class profileController extends Controller
 {
@@ -27,8 +28,9 @@ class profileController extends Controller
         $experiences = Experiences::where('id_user',$id)->get();
         $profile = User::where('id',$id)->get();
         $userskill = Userskills::where('id_user',$id)->get();
+        $feedskill = Feedskills::all();
         $follows = Follows::where('id_mid',$id)->get();
-        $myfeeds = Feeds::where('id_user',$id)->get();
+        $myfeeds = Feeds::where('id_user',$id)->orderBy('updated_at','desc')->get();
         $countFollowing = Follows::where('id_user',$id)->get()->count();
         $countFollowed = $follows->count();
         $checkFollow = Follows::where('id_mid',$id)->where('id_user',Auth::id())->get()->toArray(); 
@@ -44,6 +46,7 @@ class profileController extends Controller
             'countFollowed'=> $countFollowed,
             'myfeeds' => $myfeeds,
             'checkFollow' => $checkFollow,
+            'feedskill' => $feedskill
         ]);
       
     }
@@ -139,6 +142,7 @@ public function updatestalish(Request $request){
 			</div>";
         }
     }
+
     public function addExp(Request $request){
         $subject = $request->subject;
         $detail = $request->detail;
@@ -259,41 +263,41 @@ public function updatestalish(Request $request){
 
     public function addSki(Request $request){
         $skill = $request->skills;
-        $checkskill = Skills::all();
         $check = false;
-        $idskill = '';
+        $idskill;
+        $checkskill = Skills::all();
         foreach($checkskill as $checkskill){
-            if(levenshtein($skill,$checkskill->name) == 0){
-                $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$checkskill->id)->get()->toArray();
-                if(empty($checkuserskill)){
-                    $add = new Userskills;
-                    $add -> id_user = Auth::id();
-                    $add -> id_skill =$checkskill->id;
-                    $add ->save();
-                    return redirect()->route('profile',['id'=> Auth::id()]);
-                }
-                break;
-            }else{
+            $same = levenshtein($skill,$checkskill->name); //$same bằng 0 nếu skill input giống với skill trong bảng skills
+            if($same == 0){ // giống
                 $check = true;
-            }
+                $idskill = $checkskill->id;
+                break;
+            }else{// không giống
+                $check = false;
+            } 
         }
-        if($check = true){
+        if($check == true){
+            $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$idskill)->get()->toArray();
+            if(empty($checkuserskill)){
+                $add = new Userskills;
+                $add -> id_user = Auth::id();
+                $add -> id_skill =$checkskill->id;
+                $add ->save();
+            }else{}
+        }
+        if($check == false){
             $add = new Skills;
-            $add -> name =$skill;
+            $add -> name = $skill;
             $add -> save();
-            $skilladded = Skills::where('name',$skill)->select('id')->get();
+            $skilladded = Skills::where('name',$skill)->get();
             foreach($skilladded as $skilladded){
-                $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$skilladded)->get()->toArray();
-                if(empty($checkuserskill)){
                     $add = new Userskills;
                     $add -> id_user = Auth::id();
                     $add -> id_skill =$skilladded->id;
                     $add ->save();
-                    return redirect()->route('profile',['id'=> Auth::id()]);
-                }
-
             }
         }
+        return redirect()->route('profile',['id'=> Auth::id()]); 
     }
 
     public function deleteSki($id){
@@ -303,24 +307,101 @@ public function updatestalish(Request $request){
 
 
 
-    function searchskillAjax(Request $request)
-    {
+    function searchskillAjax(Request $request){
         if($request->get('query'))
         {
             $query = $request->get('query');
             $data = DB::table('skills')
             ->where('name', 'LIKE', "%{$query}%")
             ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            $output = '<ul class="dropdown-menu listski" style="display:block; position:relative">';
             foreach($data as $row)
             {
                $output .= '
-               <li><a class="fskill">'.$row->name.'</a><span style="display:none" id="idskill">'. $row->id .'</span></li>
+               <li class="w-skill"><a>'.$row->name.'</a></li>
                ';
            }
            $output .= '</ul>';
            echo $output;
         //    href="data/'. $row->id .'"
+        // <li class="w-skill listski"><a>'.$query.'</a></li>
        }
+    }
+
+    public function addFeed(Request $request){
+        if($request->type_feed == 1){
+            $id_user = Auth::id();
+            $level_exp = $request->level;
+            $type_feed = $request->type_feed;
+            $title = $request->title;
+            $location = $request->location;
+            $skills= $request->grpskill;
+            $salary= $request->salary;
+            $type_job= $request->typejob;
+            $description= $request->description;
+            $add = new Feeds;
+            $add -> id_user = $id_user;
+            $add -> type_feed = $type_feed;
+            $add -> title = $title;
+            $add -> salary = $salary;
+            $add -> location = $location;
+            $add -> type_job = $type_job;
+            $add -> level_exp = $level_exp;
+            $add -> description = $description;
+            $add -> save();
+            $id_feed = $add->id;
+            $all_skill = Skills::all();
+            foreach($all_skill as $s){
+                if(in_array($s->name, $skills)){
+                    $add = new Feedskills;
+                    $add -> id_feed = $id_feed;
+                    $add -> id_skill = $s->id; 
+                    $add -> save();
+                }
+            }
+            return redirect()->route('profile',['id'=> Auth::id()]);
+        }else if($request->type_feed == 2){
+            if($request->hasFile('hinh')){
+                $now = date("Ymd-His");
+                $file = $request->file('hinh');
+                $namehinh = "feed".$now.".jpg";
+                $file -> move('images/feedimage',$namehinh);
+
+                $hinh = $namehinh;
+                $id_user = Auth::id();
+                $type_feed = $request->type_feed;
+                $title = $request->title;
+                $skills= $request->grpskill;
+                $description= $request->description;
+                $add = new Feeds;
+                $add -> id_user = $id_user;
+                $add -> type_feed = $type_feed;
+                $add -> title = $title;
+                $add -> image = $hinh;
+                $add -> description = $description;
+                $add -> save();
+                $id_feed = $add->id;
+                $all_skill = Skills::all();
+                foreach($all_skill as $s){
+                    if(in_array($s->name, $skills)){
+                        $add = new Feedskills;
+                        $add -> id_feed = $id_feed;
+                        $add -> id_skill = $s->id; 
+                        $add -> save();
+                    }
+                }
+                return redirect()->route('profile',['id'=> Auth::id()]);
+            }else{
+                echo"chua co hinh";
+            }
+        }else{
+            echo 'Phát hiện bug rồi ông Giáo ạ !';
+        }
+    }
+
+    public function deleteFeed($id){
+        Feedskills::where('id_feed',$id)->delete();
+        Feeds::where('id',$id)->delete();
+        return redirect()->route('profile',['id'=> Auth::id()]);
     }
 }
