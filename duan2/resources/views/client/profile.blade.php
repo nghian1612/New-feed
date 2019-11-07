@@ -30,7 +30,7 @@
 									<img src="images/resources/{{$pro->avatar}}" alt="">
 									<div class="add-dp" id="OpenImgUpload">
 										<input type="file" id="file">
-										<label for="file"><i class="fas fa-camera"></i></label>												
+									<label for="file"><i class="fas fa-camera"></i></label>												
 									</div>
 								</div><!--user-pro-img end-->
 								<h3>{{$pro->name}}</h3>
@@ -51,7 +51,9 @@
 								</div><!--user_pro_status end-->
 								<ul class="social_links">
 									@foreach($externallink as $link)
-									<li><a href="{{$link->link}}" title=""> {{$link->link}}</a></li>
+									<li>
+										<a href="{{$link->link}}" title=""> {{$link->link}}</a>
+									</li>
 									<!-- <li><a href="" title=""><i class="la la-globe"></i></a></li> -->
 									@endforeach
 									
@@ -781,7 +783,9 @@
 								</div><!--user_pro_status end-->
 								<ul class="social_links">
 									@foreach($externallink as $link)
-									<li><a href="{{$link->link}}" title=""> {{$link->link}}</a></li>
+									<li>
+										<a href="{{$link->link}}" title=""> {{$link->link}}</a>
+									</li>
 									<!-- <li><a href="" title=""><i class="la la-globe"></i></a></li> -->
 									@endforeach
 									

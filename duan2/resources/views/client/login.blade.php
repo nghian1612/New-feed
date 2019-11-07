@@ -21,11 +21,6 @@
 
 
 <body class="sign-in">
-<<<<<<< HEAD
-	
-=======
->>>>>>> 26b518c895d67dbe81b0030564c87deee4c32845
-
 	<div class="wrapper">		
 
 		<div class="sign-in-page">
