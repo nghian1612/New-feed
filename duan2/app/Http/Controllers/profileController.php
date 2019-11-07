@@ -12,7 +12,6 @@ use App\Experiences;
 use App\Educations;
 use App\Externallinks;
 use App\Follows;
-use App\Mdfollows;
 use App\Skills;
 use App\Userskills;
 use App\Feeds;

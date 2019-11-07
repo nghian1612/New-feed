@@ -145,10 +145,10 @@
 												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
 												<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
 											</ul>
-											<ul class="bk-links">
+											<!-- <ul class="bk-links">
 												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
 												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
+											</ul> -->
 										</div>
 										<div class="job_descp">
 											<h3>{{$mfeed->title}}</h3>
@@ -172,7 +172,7 @@
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
 													<img src="images/liked-img.png" alt="">
 													<span>25</span>
 												</li> 
@@ -221,7 +221,7 @@
 										<div class="job-status-bar">
 											<ul class="like-com">
 												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
+													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
 													<img src="images/liked-img.png" alt="">
 													<span>25</span>
 												</li> 
@@ -505,7 +505,7 @@
 						</div>
 					</div>
 					<div class="col-lg-12">
-						<textarea name="description" id="editor-fjob-add" placeholder="Chi tiết công việc"></textarea>
+						<textarea name="description" id="editor-feed-add" placeholder="Chi tiết công việc"></textarea>
 					</div>
 					<div class="col-lg-12">
 						<ul>
@@ -543,11 +543,10 @@
 					<div class="col-lg-12">
 						
 							<input type="file" name="hinh" id="file">
-							<label for="file">Tải hình lên</label>	
 						
 					</div>
 					<div class="col-lg-12">
-						<textarea name="description" placeholder="Chi tiết"></textarea>
+						<textarea name="description" id="editor-feed-add-1" placeholder="Chi tiết"></textarea>
 					</div>
 					<div class="col-lg-12">
 						<ul>
@@ -1032,7 +1031,8 @@
 // Create ckeditor for form
 CKEDITOR.replace( 'editor-about-update' );
 CKEDITOR.replace( 'editor-location-update' );
-CKEDITOR.replace( 'editor-fjob-add' );
+CKEDITOR.replace( 'editor-feed-add' );
+CKEDITOR.replace( 'editor-feed-add-1' );
 // CKEDITOR.replace( 'editor-feed-add' );
 // Create ckeditor for form
 
@@ -1213,7 +1213,7 @@ $(document).ready(function(){
 		$($(this)).remove();	
 	});
 	$(document).on('click','#an_1',function(){
-		$(".post-popup.job_post").removeClass("active");
+		$(".post-popup.wh_post").removeClass("active");
 		$(".wrapper").removeClass("overlay");
 	});
 });

@@ -5,13 +5,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Feeds;
 use App\User;
+use App\Follows;
+use App\Feedskills;
+
+
 
 class newsfeedController extends Controller
 {
     public function show($id){
         if(Auth::id() == $id){
             $profile = User::where('id',$id)->get();
-            return view('client.newsfeed',['profile'=>$profile]);
+            $follows = Follows::where('id_mid',$id)->get();
+            $countFollowing = Follows::where('id_user',$id)->get()->count();
+            $countFollowed = $follows->count();
+            $userFollowing = Follows::where('id_user',$id)->select('id_mid')->get();
+            $allfeed = Feeds::orderBy('updated_at','desc')->get();
+            $feedskill = Feedskills::all();
+            return view('client.newsfeed',[
+                'profile'=>$profile,
+                'follows'=>$follows,
+                'countFollowing' => $countFollowing,
+                'countFollowed'=> $countFollowed,
+                'allfeed' =>$allfeed,
+                'userFollowing'=>$userFollowing,
+                'feedskill' => $feedskill
+                ]);
         }
         else{
             $id = Auth::id();
