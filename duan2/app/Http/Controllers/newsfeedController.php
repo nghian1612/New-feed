@@ -7,7 +7,7 @@ use App\Feeds;
 use App\User;
 use App\Follows;
 use App\Feedskills;
-
+use App\Comments;
 
 
 class newsfeedController extends Controller
@@ -21,6 +21,7 @@ class newsfeedController extends Controller
             $userFollowing = Follows::where('id_user',$id)->select('id_mid')->get();
             $allfeed = Feeds::orderBy('updated_at','desc')->get();
             $feedskill = Feedskills::all();
+            $comments = Comments::all();
             return view('client.newsfeed',[
                 'profile'=>$profile,
                 'follows'=>$follows,
@@ -28,7 +29,8 @@ class newsfeedController extends Controller
                 'countFollowed'=> $countFollowed,
                 'allfeed' =>$allfeed,
                 'userFollowing'=>$userFollowing,
-                'feedskill' => $feedskill
+                'feedskill' => $feedskill,
+                'comments' => $comments
                 ]);
         }
         else{
@@ -36,4 +38,5 @@ class newsfeedController extends Controller
             return redirect()->route('newsfeed',['id'=> $id]);
         }
     }
+
 }

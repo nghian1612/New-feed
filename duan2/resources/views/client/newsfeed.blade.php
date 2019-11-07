@@ -156,10 +156,6 @@
 													<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
 													<li><img src="images/icon9.png" alt=""><span>{{$allf->location}}</span></li>
 												</ul>
-												<!-- <ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												</ul> -->
 											</div>
 											<div class="job_descp">
 												<h3>{{$allf->title}}</h3>
@@ -187,27 +183,43 @@
 														<img src="images/liked-img.png" alt="">
 														<span>25</span>
 													</li> 
-													<li><a class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
+													<li><a class="com"><i class="fas fa-comment-alt"></i> 
+														Comment 
+														<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $allf->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+														
+													</a></li>
 												</ul>
 												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-											</div>
-											
+											</div>									
 										</div><!--post-bar end-->
 										<div class="comment-section">
 												<div class="comment-sec">
 													<ul>
+													@foreach($comments as $comment)
+														@if($comment->id_feed == $allf->id)
 														<li>
 															<div class="comment-list">
 																<div class="bg-img">
-																	<img src="images/resources/bg-img4.png" alt="" style="min-width:40px;">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
 																</div>
 																<div class="comment">
-																	<h3>John Doe</h3>
+																	<h3>{{$comment->user->name}}</h3>
 																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
-																	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
+																	<p>{{$comment->comment}}</p>
 																</div>
 															</div><!--comment-list end-->
 														</li>
+														@endif
+													@endforeach
 													</ul>
 												</div><!--comment-sec end-->
 												<div class="post-comment">
@@ -215,8 +227,10 @@
 														<img src="images/resources/bg-img4.png" alt="">
 													</div>
 													<div class="comment_box">
-														<form>
-															<input type="text" placeholder="Post a comment">
+														<form action="{{url('/client/addcomment')}}" method="post">
+															<input type="hidden" value="{{csrf_token()}}" name="_token">
+															<input type="hidden" value="{{$allf->id}}" name="idfeed">
+															<input type="text" placeholder="Post a comment" name="comment">
 															<button type="submit">Send</button>
 														</form>
 													</div>
@@ -224,8 +238,8 @@
 											</div><!--comment-section end-->
 										</div>
 										@elseif($allf->type_feed == 2)
-									<div class="posty">
-										<div class="post-bar">
+									<div class="posty mb-3">
+										<div class="post-bar no-margin">
 											<div class="post_topbar">
 												<div class="usy-dt">
 													<img src="images/resources/{{$allf->user->avatar}}" alt="">
@@ -244,15 +258,9 @@
 													@endif
 												</div>
 											</div>
-											<!-- <div class="epi-sec">
-												<ul class="bk-links">
-													<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-													<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-												</ul>
-											</div> -->
 											<div class="job_descp">
 												<h3>{{$allf->title}}</h3>
-												<p>{{$allf->description}}</p>
+												<p>{!!$allf->description!!}<br><a href="#" title="">view more</a></p>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $allf->id)
@@ -269,7 +277,18 @@
 														<img src="images/liked-img.png" alt="">
 														<span>25</span>
 													</li> 
-													<li><a class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
+													<li><a class="com"><i class="fas fa-comment-alt"></i> Comment 
+													<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $allf->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+													</a></li>
 												</ul>
 												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
 											</div>
@@ -277,18 +296,22 @@
 										<div class="comment-section">
 											<div class="comment-sec">
 												<ul>
-													<li>
-														<div class="comment-list">
-															<div class="bg-img">
-																<img src="images/resources/bg-img4.png" alt="" style="min-width:40px;">
-															</div>
-															<div class="comment">
-																<h3>John Doe</h3>
-																<span><img src="images/clock.png" alt=""> 3 min ago</span>
-																<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-															</div>
-														</div><!--comment-list end-->
-													</li>
+												@foreach($comments as $comment)
+														@if($comment->id_feed == $allf->id)
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
+																</div>
+																<div class="comment">
+																	<h3>{{$comment->user->name}}</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>{{$comment->comment}}</p>
+																</div>
+															</div><!--comment-list end-->
+														</li>
+														@endif
+													@endforeach
 												</ul>
 											</div><!--comment-sec end-->
 											<div class="post-comment">
@@ -296,8 +319,10 @@
 													<img src="images/resources/bg-img4.png" alt="">
 												</div>
 												<div class="comment_box">
-													<form>
-														<input type="text" placeholder="Post a comment">
+													<form action="{{url('/client/addcomment')}}" method="post">
+														<input type="hidden" value="{{csrf_token()}}" name="_token">
+														<input type="hidden" value="{{$allf->id}}" name="idfeed">
+														<input type="text" placeholder="Post a comment" name="comment">
 														<button type="submit">Send</button>
 													</form>
 												</div>
@@ -308,63 +333,7 @@
 										@endif
 									@endforeach
 								@endforeach
-								<div class="post-bar">
-									<div class="post_topbar">
-										<div class="usy-dt">
-											<img src="images/resources/us-pic.png" alt="">
-											<div class="usy-name">
-												<h3>John Doe</h3>
-												<span><img src="images/clock.png" alt="">3 min ago</span>
-											</div>
-										</div>
-										<div class="ed-opts">
-											<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-											<ul class="ed-options">
-												<li><a href="#" title="">Edit Post</a></li>
-												<li><a href="#" title="">Unsaved</a></li>
-												<li><a href="#" title="">Unbid</a></li>
-												<li><a href="#" title="">Close</a></li>
-												<li><a href="#" title="">Hide</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="epi-sec">
-										<ul class="descp">
-											<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-											<li><img src="images/icon9.png" alt=""><span>India</span></li>
-										</ul>
-										<ul class="bk-links">
-											<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-											<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-										</ul>
-									</div>
-									<div class="job_descp">
-										<h3>Senior Wordpress Developer</h3>
-										<ul class="job-dt">
-											<li><a href="#" title="">Full Time</a></li>
-											<li><span>$30 / hr</span></li>
-										</ul>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-										<ul class="skill-tags">
-											<li><a href="#" title="">HTML</a></li>
-											<li><a href="#" title="">PHP</a></li>
-											<li><a href="#" title="">CSS</a></li>
-											<li><a href="#" title="">Javascript</a></li>
-											<li><a href="#" title="">Wordpress</a></li> 	
-										</ul>
-									</div>
-									<div class="job-status-bar">
-										<ul class="like-com">
-											<li>
-												<a href="#"><i class="fas fa-heart"></i> Like</a>
-												<img src="images/liked-img.png" alt="">
-												<span>25</span>
-											</li> 
-											<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-										</ul>
-										<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-									</div>
-								</div><!--post-bar end-->
+
 								<div class="top-profiles">
 									<div class="pf-hd">
 										<h3>Top Profiles</h3>
@@ -439,155 +408,6 @@
 										</div><!--user-profy end-->
 									</div><!--profiles-slider end-->
 								</div><!--top-profiles end-->
-								<div class="post-bar">
-									<div class="post_topbar">
-										<div class="usy-dt">
-											<img src="images/resources/us-pic.png" alt="">
-											<div class="usy-name">
-												<h3>John Doe</h3>
-												<span><img src="images/clock.png" alt="">3 min ago</span>
-											</div>
-										</div>
-										<div class="ed-opts">
-											<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-											<ul class="ed-options">
-												<li><a href="#" title="">Edit Post</a></li>
-												<li><a href="#" title="">Unsaved</a></li>
-												<li><a href="#" title="">Unbid</a></li>
-												<li><a href="#" title="">Close</a></li>
-												<li><a href="#" title="">Hide</a></li>
-											</ul>
-										</div>
-									</div>
-									<div class="epi-sec">
-										<ul class="descp">
-											<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-											<li><img src="images/icon9.png" alt=""><span>India</span></li>
-										</ul>
-										<ul class="bk-links">
-											<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-											<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											<li><a href="#" title="" class="bid_now">Bid Now</a></li>
-										</ul>
-									</div>
-									<div class="job_descp">
-										<h3>Senior Wordpress Developer</h3>
-										<ul class="job-dt">
-											<li><a href="#" title="">Full Time</a></li>
-											<li><span>$30 / hr</span></li>
-										</ul>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-										<ul class="skill-tags">
-											<li><a href="#" title="">HTML</a></li>
-											<li><a href="#" title="">PHP</a></li>
-											<li><a href="#" title="">CSS</a></li>
-											<li><a href="#" title="">Javascript</a></li>
-											<li><a href="#" title="">Wordpress</a></li> 	
-										</ul>
-									</div>
-									<div class="job-status-bar">
-										<ul class="like-com">
-											<li>
-												<a href="#"><i class="fas fa-heart"></i> Like</a>
-												<img src="images/liked-img.png" alt="">
-												<span>25</span>
-											</li> 
-											<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-										</ul>
-										<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-									</div>
-								</div><!--post-bar end-->
-								<div class="posty">
-									<div class="post-bar no-margin">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/us-pc2.png" alt="">
-												<div class="usy-name">
-													<h3>John Doe</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Edit Post</a></li>
-													<li><a href="#" title="">Unsaved</a></li>
-													<li><a href="#" title="">Unbid</a></li>
-													<li><a href="#" title="">Close</a></li>
-													<li><a href="#" title="">Hide</a></li>
-												</ul>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>India</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>Senior Wordpress Developer</h3>
-											<ul class="job-dt">
-												<li><a href="#" title="">Full Time</a></li>
-												<li><span>$30 / hr</span></li>
-											</ul>
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at. Etiam id magna sit amet... <a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-									</div><!--post-bar end-->
-									<div class="comment-section">
-										<a href="#" class="plus-ic">
-											<i class="la la-plus"></i>
-										</a>
-										<div class="comment-sec">
-											<ul>
-												<li>
-													<div class="comment-list">
-														<div class="bg-img">
-															<img src="images/resources/bg-img4.png" alt="" style="min-width:40px;">
-														</div>
-														<div class="comment">
-															<h3>John Doe</h3>
-															<span><img src="images/clock.png" alt=""> 3 min ago</span>
-															<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus hendrerit metus, ut ullamcorper quam finibus at.</p>
-														</div>
-													</div><!--comment-list end-->
-												</li>
-											</ul>
-										</div><!--comment-sec end-->
-										<div class="post-comment">
-											<div class="cm_img">
-												<img src="images/resources/bg-img4.png" alt="">
-											</div>
-											<div class="comment_box">
-												<form>
-													<input type="text" placeholder="Post a comment">
-													<button type="submit">Send</button>
-												</form>
-											</div>
-										</div><!--post-comment end-->
-									</div><!--comment-section end-->
-								</div><!--posty end-->
 								<div class="process-comm">
 									<div class="spinner">
 										<div class="bounce1"></div>

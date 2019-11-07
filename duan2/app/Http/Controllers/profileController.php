@@ -18,6 +18,7 @@ use App\Feeds;
 use App\Types;
 use App\Catalogs;
 use App\Feedskills;
+use App\Comments;
 
 
 class profileController extends Controller
@@ -34,6 +35,7 @@ class profileController extends Controller
         $countFollowing = Follows::where('id_user',$id)->get()->count();
         $countFollowed = $follows->count();
         $checkFollow = Follows::where('id_mid',$id)->where('id_user',Auth::id())->get()->toArray(); 
+        $comments = Comments::all();
         return view('client.profile',
         [
             'profile'=>$profile,
@@ -46,7 +48,8 @@ class profileController extends Controller
             'countFollowed'=> $countFollowed,
             'myfeeds' => $myfeeds,
             'checkFollow' => $checkFollow,
-            'feedskill' => $feedskill
+            'feedskill' => $feedskill,
+            'comments' => $comments
         ]);
       
     }
@@ -102,7 +105,7 @@ public function updatestalish(Request $request){
         $add -> id_user = $id_user;
         $add -> id_mid = $id_mid;
         $add -> save();
-        return redirect()->route('profile',['id'=> $id]);
+        return back();
     }
 
 
@@ -114,7 +117,7 @@ public function updatestalish(Request $request){
 //
     public function followoff($id){
         Follows::where('id_mid',$id)->where('id_user',Auth::id())->delete();
-        return redirect()->route('profile',['id'=> $id]);
+        return back();
     }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -359,7 +362,7 @@ public function updatestalish(Request $request){
                     $add -> save();
                 }
             }
-            return redirect()->route('profile',['id'=> Auth::id()]);
+            return back();
         }else if($request->type_feed == 2){
             if($request->hasFile('hinh')){
                 $now = date("Ymd-His");
@@ -390,7 +393,7 @@ public function updatestalish(Request $request){
                         $add -> save();
                     }
                 }
-                return redirect()->route('profile',['id'=> Auth::id()]);
+                return back();
             }else{
                 echo"chua co hinh";
             }
@@ -402,6 +405,19 @@ public function updatestalish(Request $request){
     public function deleteFeed($id){
         Feedskills::where('id_feed',$id)->delete();
         Feeds::where('id',$id)->delete();
-        return redirect()->route('profile',['id'=> Auth::id()]);
+        return back();
+    }
+
+
+    public function addComment(Request $request){
+        $id_feed = $request->idfeed;
+        $id_user = Auth::id();
+        $comment = $request->comment;
+        $add = new Comments;
+        $add -> id_user = $id_user;
+        $add -> id_feed = $id_feed;
+        $add -> comment = $comment;
+        $add -> save();
+        return back();
     }
 }
