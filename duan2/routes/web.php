@@ -51,6 +51,7 @@ Route::group(['prefix'=>'client', 'middleware'=>'clientlogin'],function(){
 
 
     Route::post('search/name','profileController@searchskillAjax')->name('search');
+    Route::post('addjob','profileController@addJob');
 });
 
 

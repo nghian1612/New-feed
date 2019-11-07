@@ -259,41 +259,41 @@ public function updatestalish(Request $request){
 
     public function addSki(Request $request){
         $skill = $request->skills;
-        $checkskill = Skills::all();
         $check = false;
-        $idskill = '';
+        $idskill;
+        $checkskill = Skills::all();
         foreach($checkskill as $checkskill){
-            if(levenshtein($skill,$checkskill->name) == 0){
-                $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$checkskill->id)->get()->toArray();
-                if(empty($checkuserskill)){
-                    $add = new Userskills;
-                    $add -> id_user = Auth::id();
-                    $add -> id_skill =$checkskill->id;
-                    $add ->save();
-                    return redirect()->route('profile',['id'=> Auth::id()]);
-                }
-                break;
-            }else{
+            $same = levenshtein($skill,$checkskill->name); //$same bằng 0 nếu skill input giống với skill trong bảng skills
+            if($same == 0){ // giống
                 $check = true;
-            }
+                $idskill = $checkskill->id;
+                break;
+            }else{// không giống
+                $check = false;
+            } 
         }
-        if($check = true){
+        if($check == true){
+            $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$idskill)->get()->toArray();
+            if(empty($checkuserskill)){
+                $add = new Userskills;
+                $add -> id_user = Auth::id();
+                $add -> id_skill =$checkskill->id;
+                $add ->save();
+            }else{}
+        }
+        if($check == false){
             $add = new Skills;
-            $add -> name =$skill;
+            $add -> name = $skill;
             $add -> save();
-            $skilladded = Skills::where('name',$skill)->select('id')->get();
+            $skilladded = Skills::where('name',$skill)->get();
             foreach($skilladded as $skilladded){
-                $checkuserskill = Userskills::where('id_user',Auth::id())->where('id_skill',$skilladded)->get()->toArray();
-                if(empty($checkuserskill)){
                     $add = new Userskills;
                     $add -> id_user = Auth::id();
                     $add -> id_skill =$skilladded->id;
                     $add ->save();
-                    return redirect()->route('profile',['id'=> Auth::id()]);
-                }
-
             }
         }
+        return redirect()->route('profile',['id'=> Auth::id()]); 
     }
 
     public function deleteSki($id){
@@ -311,16 +311,64 @@ public function updatestalish(Request $request){
             $data = DB::table('skills')
             ->where('name', 'LIKE', "%{$query}%")
             ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            $output = '<ul class="dropdown-menu listski" style="display:block; position:relative">
+            <li class="w-skill listski"><a>'.$query.'</a></li>';
             foreach($data as $row)
             {
                $output .= '
-               <li><a class="fskill">'.$row->name.'</a><span style="display:none" id="idskill">'. $row->id .'</span></li>
+               <li class="w-skill"><a>'.$row->name.'</a></li>
                ';
            }
            $output .= '</ul>';
            echo $output;
         //    href="data/'. $row->id .'"
        }
+    }
+
+    public function addJob(Request $request){
+        $title = $request->title;
+        $location = $request->location;
+        $skills= $request->grpskill;
+        $salary= $request->salary;
+        $typejob= $request->typejob;
+        $description= $request->description;
+        $nameskill = Skills::select('name')->get();
+        $arrskill=[];
+        foreach($nameskill as $nameskill){
+            array_push($arrskill,$nameskill->name);
+        }
+        // echo'mảng skills<br>';
+        // print_r($arrskill);
+        // echo'mảng từ form<br>';
+        // print_r($skills);
+        // echo'những phần tử khác với mảng skills<br>';
+        $a = array_diff($skills,$arrskill);
+        // print_r($a);
+        if(!empty($a)){
+            foreach($a as $a){
+                $add = new Skills;
+                $add -> name = $a;
+                $add -> save();
+            }
+            foreach($skills as $skills){
+                // $checkskill = Skills::where('name',$skills)->get()->toArray();
+                // print_r($checkskill);
+                // $add = new Feedskills;
+                // $add =
+            }
+            //echo 'đã thêm vào bảng';
+        }
+        //$key = array('name');
+        //$a = array_combine($key,$value);
+        //foreach($checkskill as $checkskill){
+            // $a = array_diff($checkskill,$skills);
+            // if(){
+                
+            // }else{
+                
+            // }
+            // echo '<br>';
+            // print_r($a);
+        //}
     }
 }

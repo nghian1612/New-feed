@@ -22,7 +22,7 @@
 	
 </head>
 
-<body oncontextmenu="return false;">	
+<body>	
 
 	<div class="wrapper">	
 		

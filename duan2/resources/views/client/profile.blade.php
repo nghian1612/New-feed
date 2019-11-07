@@ -16,13 +16,11 @@
 		</div>
 	</div>
 </section>
-
 <main>
 	<div class="main-section">
 		<div class="container">
 			<div class="main-section-data">
 				<div class="row">
-
 					<div class="col-lg-3">
 						<div class="main-left-sidebar">
 							<div class="user_profile">
@@ -523,7 +521,7 @@
 			<textarea name="description" placeholder="Description" id="editor-edu-insert"></textarea>
 			<input type="checkbox" name="graduated" value="1"><span>Đã tốt nghiệp</span>
 			<button type="submit" class="save">Save</button>
-			<button type="submit" class="cancel">Cancel</button>
+			<button class="cancel">Cancel</button>
 		</form>
 		<a href="#" title="" class="close-box"><i class="la la-close"></i></a>
 	</div><!--overview-edit end-->
@@ -587,7 +585,8 @@
 	<div class="post-project">
 		<h3>Đăng việc làm</h3>
 		<div class="post-project-fields">
-			<form autocomplete="off">
+			<form autocomplete="off" action="{{url('/client/addjob')}}" method="post">
+				<input type="hidden" value="{{csrf_token()}}" name="_token">
 				<div class="row">
 					<div class="col-lg-12">
 						<input type="text" name="title" placeholder="Tiêu đề">
@@ -595,10 +594,8 @@
 					<div class="col-lg-12">
 						<input type="text" name="location" placeholder="Địa chỉ làm việc">
 					</div>
-					
-					<div id="skills_changed"></div>
-					
 					<div class="col-lg-12">
+						<ul id="skills_changed"></ul>
 						<input type="text" name="skills" placeholder="Kỹ năng cần có" id="country_name">
 						<div id="countryList"></div>
 						{{ csrf_field() }}
@@ -623,7 +620,7 @@
 					<div class="col-lg-12">
 						<ul>
 							<li><button class="active" type="submit" value="post">Đăng bài</button></li>
-							<li><a href="#" title="">Hủy</a></li>
+							<li><a title="" id="an">Hủy</a></li>
 						</ul>
 					</div>
 				</div>
@@ -1258,7 +1255,8 @@ $(document).ready(function(){
 	$('#country_name').keyup(function(){ //bắt sự kiện keyup khi người dùng gõ từ khóa tim kiếm
  		var query = $(this).val(); //lấy gía trị ng dùng gõ
  		if(query != '') //kiểm tra khác rỗng thì thực hiện đoạn lệnh bên dưới
-		{
+		{	
+			console.log(query);
 			var _token = $('input[name="_token"]').val(); // token để mã hóa dữ liệu
 			$.ajax({
 				url:"{{ route('search') }}", // đường dẫn khi gửi dữ liệu đi 'search' là tên route mình đặt bạn mở route lên xem là hiểu nó là cái j.
@@ -1270,32 +1268,32 @@ $(document).ready(function(){
 				}
 			});
 		}
-
-		$(document).on('click', 'li', function(){
-			console.log(data);
-			$('#country_name').val($(this).text());
-			$('#countryList').fadeOut();  
-		});  
 	});
-
-	// $(document).on('click', 'li', function(){  
-	// 	$('#country_name').val($(this).text());
-	// 	console.log(data);
-		// var feedskill = {
-		// 	id :function(){
-		// 		$('#idskill').val();
-		// 	},
-		// 	fskill :function(){
-		// 		$('#fskill').val();
-		// 	}
-		// };
-		//feedskill.push($(this));
-		//$('#skills_changed').html('<a class="fskill">'.$row->name.'</a><span style="display:none" id="idskill">'. $row->id .'</span>')
- 		// $('#countryList').fadeOut();  
-	// });  
+	var grpskill = [];
+	$(document).on('click', '.w-skill', function(){
+		$('#country_name').val($(this).text());
+		$('#countryList').fadeOut();  
+		console.log($('#country_name').val());
+		var skill = $('#country_name').val()
+		grpskill.push(skill);
+		console.log(grpskill);
+		$('#skills_changed').append('<li class="w-skillch"><input type="checkbox" name="grpskill[]" value="'+skill+'" checked="checked"></li>');
+		return grpskill;
+	}); 
+	$(document).on('click', '.w-skillch', function(){
+		var skill = $(this).text();
+		var i = grpskill.indexOf(skill);
+		if (i != -1) {
+			grpskill.splice(i,1);
+			console.log(grpskill);
+			return grpskill;
+		}
+		$($(this)).remove();	
+	});
+	$(document).on('click','#an',function(){
+		console.log(grpskill);
+	});
 });
-
-//skills_changed
 
 
 
