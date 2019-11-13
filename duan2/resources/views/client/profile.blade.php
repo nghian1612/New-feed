@@ -123,114 +123,204 @@
 								<div class="posts-section">
 								@foreach($myfeeds as $mfeed)
 									@if($mfeed->type_feed == 1)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
+									<div class="posty mb-3">
+										<div class="post-bar no-margin">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
+													<div class="usy-name">
+														<h3>{{$mfeed->user->name}}</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													@if($mfeed->id_user == Auth::id())
+													<ul class="ed-options">
+														<li><a href="#" title="">Chỉnh sửa</a></li>
+														<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+													</ul>
+													@endif
 												</div>
 											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Chỉnh sửa</a></li>
-													<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+											<div class="epi-sec">
+												<ul class="descp">
+													<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
+													<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
 												</ul>
 											</div>
+											<div class="job_descp">
+												<h3>{{$mfeed->title}}</h3>
+												<ul class="job-dt">
+													@if($mfeed->type_job == 1)
+													<li><a href="#" title="">Full Time</a></li>
+													@else
+													<li><a href="#" title="">Part Time</a></li>
+													@endif
+													<li><span>{{$mfeed->salary}}đ / tháng</span></li>
+												</ul>
+												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<ul class="skill-tags">
+													@foreach($feedskill as $fskill)
+													@if($fskill->id_feed == $mfeed->id)
+													<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+													@endif
+													@endforeach	
+												</ul>
+											</div>
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span>25</span>
+													</li> 
+													<li><a class="com"><i class="fas fa-comment-alt"></i> 
+														Comment 
+														<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $mfeed->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+														
+													</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>									
+										</div><!--post-bar end-->
+										<div class="comment-section">
+												<div class="comment-sec">
+													<ul>
+													@foreach($comments as $comment)
+														@if($comment->id_feed == $mfeed->id)
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
+																</div>
+																<div class="comment">
+																	<h3>{{$comment->user->name}}</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>{{$comment->comment}}</p>
+																</div>
+															</div><!--comment-list end-->
+														</li>
+														@endif
+													@endforeach
+													</ul>
+												</div><!--comment-sec end-->
+												<div class="post-comment">
+													<div class="cm_img">
+														<img src="images/resources/bg-img4.png" alt="">
+													</div>
+													<div class="comment_box">
+														<form action="{{url('/client/addcomment')}}" method="post">
+															<input type="hidden" value="{{csrf_token()}}" name="_token">
+															<input type="hidden" value="{{$mfeed->id}}" name="idfeed">
+															<input type="text" placeholder="Post a comment" name="comment">
+															<button type="submit">Send</button>
+														</form>
+													</div>
+												</div><!--post-comment end-->
+											</div><!--comment-section end-->
 										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
-											</ul>
-											<!-- <ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul> -->
-										</div>
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<ul class="job-dt">
-												@if($mfeed->type_job == 1)
-												<li><a href="#" title="">Full Time</a></li>
-												@else
-												<li><a href="#" title="">Part Time</a></li>
-												@endif
-												<li><span>{{$mfeed->salary}}đ / tháng</span></li>
-											</ul>
-											<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												@foreach($feedskill as $fskill)
-												@if($fskill->id_feed == $mfeed->id)
-												<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
-												@endif
-												@endforeach	
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										
-									</div><!--post-bar end-->
 									@elseif($mfeed->type_feed == 2)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
+									<div class="posty mb-3">
+										<div class="post-bar no-margin">
+											<div class="post_topbar">
+												<div class="usy-dt">
+													<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
+													<div class="usy-name">
+														<h3>{{$mfeed->user->name}}</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
+													</div>
+												</div>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													@if($mfeed->id_user == Auth::id())
+													<ul class="ed-options">
+														<li><a href="#" title="">Chỉnh sửa</a></li>
+														<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+													</ul>
+													@endif
 												</div>
 											</div>
-											<div class="ed-opts">
-												<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
-												<ul class="ed-options">
-													<li><a href="#" title="">Chỉnh sửa</a></li>
-													<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+											<div class="job_descp">
+												<h3>{{$mfeed->title}}</h3>
+												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<ul class="skill-tags">
+													@foreach($feedskill as $fskill)
+													@if($fskill->id_feed == $mfeed->id)
+													<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+													@endif
+													@endforeach		
 												</ul>
+												<img src="images/feedimage/{{$mfeed->image}}" alt="">
 											</div>
-										</div>
-										<!-- <div class="epi-sec">
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div> -->
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<p>{{$mfeed->description}}</p>
-											<ul class="skill-tags">
-												@foreach($feedskill as $fskill)
-												@if($fskill->id_feed == $mfeed->id)
-												<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
-												@endif
-												@endforeach		
-											</ul>
-											<img src="images/feedimage/{{$mfeed->image}}" alt="">
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										
-									</div><!--post-bar end-->
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span>25</span>
+													</li> 
+													<li><a class="com"><i class="fas fa-comment-alt"></i> Comment 
+													<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $mfeed->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+													</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>
+										</div><!--post-bar end-->
+										<div class="comment-section">
+											<div class="comment-sec">
+												<ul>
+												@foreach($comments as $comment)
+														@if($comment->id_feed == $mfeed->id)
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
+																</div>
+																<div class="comment">
+																	<h3>{{$comment->user->name}}</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>{{$comment->comment}}</p>
+																</div>
+															</div><!--comment-list end-->
+														</li>
+														@endif
+													@endforeach
+												</ul>
+											</div><!--comment-sec end-->
+											<div class="post-comment">
+												<div class="cm_img">
+													<img src="images/resources/bg-img4.png" alt="">
+												</div>
+												<div class="comment_box">
+													<form action="{{url('/client/addcomment')}}" method="post">
+														<input type="hidden" value="{{csrf_token()}}" name="_token">
+														<input type="hidden" value="{{$mfeed->id}}" name="idfeed">
+														<input type="text" placeholder="Post a comment" name="comment">
+														<button type="submit">Send</button>
+													</form>
+												</div>
+											</div><!--post-comment end-->
+										</div><!--comment-section end-->
+									</div>
 									@endif
 								@endforeach
 									<div class="process-comm">
@@ -701,201 +791,204 @@
 								<div class="posts-section">
 								@foreach($myfeeds as $mfeed)
 									@if($mfeed->type_feed == 1)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="descp">
-												<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
-												<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
-											</ul>
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<ul class="job-dt">
-												@if($mfeed->type_job == 1)
-												<li><a href="#" title="">Full Time</a></li>
-												@else
-												<li><a href="#" title="">Part Time</a></li>
-												@endif
-												<li><span>{{$mfeed->salary}}đ / tháng</span></li>
-											</ul>
-											<p>{{$mfeed->description}}<br><a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										<!-- <div class="comment-content close">
-											<div class="post_topbar post-reply">
+									<div class="posty mb-3">
+										<div class="post-bar no-margin">
+											<div class="post_topbar">
 												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">
+													<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
 													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
+														<h3>{{$mfeed->user->name}}</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
 													</div>
 												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													@if($mfeed->id_user == Auth::id())
+													<ul class="ed-options">
+														<li><a href="#" title="">Chỉnh sửa</a></li>
+														<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+													</ul>
+													@endif
 												</div>
 											</div>
-										</div> -->
-									</div><!--post-bar end-->
+											<div class="epi-sec">
+												<ul class="descp">
+													<li><img src="images/icon8.png" alt=""><span>Epic Coder</span></li>
+													<li><img src="images/icon9.png" alt=""><span>{{$mfeed->location}}</span></li>
+												</ul>
+											</div>
+											<div class="job_descp">
+												<h3>{{$mfeed->title}}</h3>
+												<ul class="job-dt">
+													@if($mfeed->type_job == 1)
+													<li><a href="#" title="">Full Time</a></li>
+													@else
+													<li><a href="#" title="">Part Time</a></li>
+													@endif
+													<li><span>{{$mfeed->salary}}đ / tháng</span></li>
+												</ul>
+												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<ul class="skill-tags">
+													@foreach($feedskill as $fskill)
+													@if($fskill->id_feed == $mfeed->id)
+													<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+													@endif
+													@endforeach	
+												</ul>
+											</div>
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span>25</span>
+													</li> 
+													<li><a class="com"><i class="fas fa-comment-alt"></i> 
+														Comment 
+														<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $mfeed->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+														
+													</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>									
+										</div><!--post-bar end-->
+										<div class="comment-section">
+												<div class="comment-sec">
+													<ul>
+													@foreach($comments as $comment)
+														@if($comment->id_feed == $mfeed->id)
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
+																</div>
+																<div class="comment">
+																	<h3>{{$comment->user->name}}</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>{{$comment->comment}}</p>
+																</div>
+															</div><!--comment-list end-->
+														</li>
+														@endif
+													@endforeach
+													</ul>
+												</div><!--comment-sec end-->
+												<div class="post-comment">
+													<div class="cm_img">
+														<img src="images/resources/bg-img4.png" alt="">
+													</div>
+													<div class="comment_box">
+														<form action="{{url('/client/addcomment')}}" method="post">
+															<input type="hidden" value="{{csrf_token()}}" name="_token">
+															<input type="hidden" value="{{$mfeed->id}}" name="idfeed">
+															<input type="text" placeholder="Post a comment" name="comment">
+															<button type="submit">Send</button>
+														</form>
+													</div>
+												</div><!--post-comment end-->
+											</div><!--comment-section end-->
+										</div>
 									@elseif($mfeed->type_feed == 2)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
-											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<p>{{$mfeed->description}}<br><a href="{{$mfeed->link_project}}" title="" target="blank">{{$mfeed->link_project}}</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
-											</ul>
-											<img src="images/resources/{{$mfeed->image}}" alt="">
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										<!-- <div class="comment-content close">
-											<div class="post_topbar post-reply">
+									<div class="posty mb-3">
+										<div class="post-bar no-margin">
+											<div class="post_topbar">
 												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">
+													<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
 													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
+														<h3>{{$mfeed->user->name}}</h3>
+														<span><img src="images/clock.png" alt="">3 min ago</span>
 													</div>
 												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
+												<div class="ed-opts">
+													<a href="#" title="" class="ed-opts-open"><i class="la la-ellipsis-v"></i></a>
+													@if($mfeed->id_user == Auth::id())
+													<ul class="ed-options">
+														<li><a href="#" title="">Chỉnh sửa</a></li>
+														<li><a href="client/deletefeed/{{$mfeed->id}}" title="">Xóa</a></li>
+													</ul>
+													@endif
 												</div>
 											</div>
-										</div> -->
-									</div><!--post-bar end-->
-									@elseif($mfeed->type_feed == 3)
-									<div class="post-bar">
-										<div class="post_topbar">
-											<div class="usy-dt">
-												<img src="images/resources/{{$mfeed->user->avatar}}" alt="">
-												<div class="usy-name">
-													<h3>{{$mfeed->user->name}}</h3>
-													<span><img src="images/clock.png" alt="">3 min ago</span>
-												</div>
+											<div class="job_descp">
+												<h3>{{$mfeed->title}}</h3>
+												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<ul class="skill-tags">
+													@foreach($feedskill as $fskill)
+													@if($fskill->id_feed == $mfeed->id)
+													<li><a href="#" title="">{{$fskill->skill->name}}</a></li>
+													@endif
+													@endforeach		
+												</ul>
+												<img src="images/feedimage/{{$mfeed->image}}" alt="">
 											</div>
-										</div>
-										<div class="epi-sec">
-											<ul class="bk-links">
-												<li><a href="#" title=""><i class="la la-bookmark"></i></a></li>
-												<li><a href="#" title=""><i class="la la-envelope"></i></a></li>
-											</ul>
-										</div>
-										<div class="job_descp">
-											<h3>{{$mfeed->title}}</h3>
-											<p>{{$mfeed->description}}<br><a href="#" title="">view more</a></p>
-											<ul class="skill-tags">
-												<li><a href="#" title="">HTML</a></li>
-												<li><a href="#" title="">PHP</a></li>
-												<li><a href="#" title="">CSS</a></li>
-												<li><a href="#" title="">Javascript</a></li>
-												<li><a href="#" title="">Wordpress</a></li> 	
-											</ul>
-										</div>
-										<div class="job-status-bar">
-											<ul class="like-com">
-												<li>
-													<a href="#"><i class="fas fa-heart"></i> Like</a>
-													<img src="images/liked-img.png" alt="">
-													<span>25</span>
-												</li> 
-												<li><a href="#" class="com"><i class="fas fa-comment-alt"></i> Comment 15</a></li>
-											</ul>
-											<a href="#"><i class="fas fa-eye"></i>Views 50</a>
-										</div>
-										<!-- <div class="comment-content">
-											<div class="post_topbar post-reply">
-												<div class="usy-dt">
+											<div class="job-status-bar">
+												<ul class="like-com">
+													<li>
+														<a href="client/likefeed/{{$mfeed->id}}"><i class="fas fa-heart"></i> Like</a>
+														<img src="images/liked-img.png" alt="">
+														<span>25</span>
+													</li> 
+													<li><a class="com"><i class="fas fa-comment-alt"></i> Comment 
+													<?php 
+															$i = [];
+															foreach($comments as $comment)
+															{
+																if($comment->id_feed == $mfeed->id){
+																	array_push($i,$comment->id_feed);
+																}
+															}
+															echo count($i);
+														?>
+													</a></li>
+												</ul>
+												<a href="#"><i class="fas fa-eye"></i>Views 50</a>
+											</div>
+										</div><!--post-bar end-->
+										<div class="comment-section">
+											<div class="comment-sec">
+												<ul>
+												@foreach($comments as $comment)
+														@if($comment->id_feed == $mfeed->id)
+														<li>
+															<div class="comment-list">
+																<div class="bg-img">
+																	<img src="images/resources/{{$comment->user->avatar}}" alt="" style="min-width:40px;">
+																</div>
+																<div class="comment">
+																	<h3>{{$comment->user->name}}</h3>
+																	<span><img src="images/clock.png" alt=""> 3 min ago</span>
+																	<p>{{$comment->comment}}</p>
+																</div>
+															</div><!--comment-list end-->
+														</li>
+														@endif
+													@endforeach
+												</ul>
+											</div><!--comment-sec end-->
+											<div class="post-comment">
+												<div class="cm_img">
 													<img src="images/resources/bg-img4.png" alt="">
-													<div class="usy-name">
-														<h3>John Doe</h3><span><i class="la la-clock-o"></i>3 min ago</span>	
-														<div class="epi-sec epi2">									   
-															<p class="tahnks">Thanks :)</p>
-														</div>
-													</div>
 												</div>
-											</div>
-											<div class="post_topbar rep-post rep-thanks">
-												<hr>
-												<div class="usy-dt">
-													<img src="images/resources/bg-img4.png" alt="">														
-													<input class="reply" type="text" placeholder="Reply">
-													<a class="replybtn" href="#">Send</a>
+												<div class="comment_box">
+													<form action="{{url('/client/addcomment')}}" method="post">
+														<input type="hidden" value="{{csrf_token()}}" name="_token">
+														<input type="hidden" value="{{$mfeed->id}}" name="idfeed">
+														<input type="text" placeholder="Post a comment" name="comment">
+														<button type="submit">Send</button>
+													</form>
 												</div>
-											</div>
-										</div> -->
-									</div><!--post-bar end-->
+											</div><!--post-comment end-->
+										</div><!--comment-section end-->
+									</div>
 									@endif
 								@endforeach
 									<div class="process-comm">
@@ -917,7 +1010,7 @@
 								<div class="user-profile-ov st2">
 									<h3>KINH NGHIỆM</h3>
 									@foreach($experiences as $exp)
-									<h4>{{$exp->subject}}<button value="{{$exp->id}}" title="" class="exp-bx-open"><i class="fa fa-pencil"></i></button><a href="/client/deleteexp/{{$exp->id}}">xoa</a></h4>
+									<h4>{{$exp->subject}}</h4>
 									<input type="hidden" class="idexp"value="{{$exp->id}}">
 									<p>{!!$exp->detail!!} </p>
 									@endforeach
@@ -938,14 +1031,11 @@
 								<div class="user-profile-ov">
 									<h3>KỸ NĂNG</h3>
 									<ul>
-										<li><a href="#" title="">HTML</a></li>
-										<li><a href="#" title="">PHP</a></li>
-										<li><a href="#" title="">CSS</a></li>
-										<li><a href="#" title="">Javascript</a></li>
-										<li><a href="#" title="">Wordpress</a></li>
-										<li><a href="#" title="">Photoshop</a></li>
-										<li><a href="#" title="">Illustrator</a></li>
-										<li><a href="#" title="">Corel Draw</a></li>
+									@foreach($userskill as $skill)
+										<li style='position:relative; padding-right:10px;'>
+											<a href="#" title="" style="">{{$skill->skill->name}}</a>
+										</li>
+									@endforeach
 									</ul>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
@@ -1229,6 +1319,13 @@ $(".post-project > a").on("click", function(){
 });
 // End Action form feedshare
 
+
+$(document).ready(function(){
+	$('.comment-section').hide();
+	$(".post-bar > .job-status-bar > .like-com > li > .com").on("click", function(){
+		$(this).parentsUntil(".posty").next('.comment-section').slideToggle();
+	})
+});
 
 </script>
 @endsection

@@ -59,23 +59,20 @@ class Users extends Model
         return $this -> hasMany('App/Educations','id_user','id');
     }
 
-    public function mdfollow(){
-        return $this -> hasMany('App/Follows','id_user','id');
-    }
     public function follow(){
     	return $this -> hasMany('App\Follows','id_mid','id');
     }
 
     public function feed(){
-        return $this -> hasMany('App/Feeds','id_user','id');
+        return $this -> hasMany('App\Feeds','id_user','id');
     }
 
     public function comment(){
-        return $this -> belongsTo('App/Comments','id_user','id');
+        return $this -> belongsTo('App\Comments','id_user','id');
     }
 
     public function like(){
-        return $this -> belongsTo('App/Likes','id_user','id');
+        return $this -> belongsTo('App\Likes','id_user','id');
     }
 
 }

@@ -54,6 +54,9 @@ Route::group(['prefix'=>'client', 'middleware'=>'clientlogin'],function(){
     
     Route::post('addjob','profileController@addFeed');
     Route::get('deletefeed/{id}','profileController@deleteFeed');
+
+
+    Route::post('addcomment','profileController@addComment');
 });
 
 
