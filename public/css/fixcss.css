@@ -1,0 +1,25 @@
+.w-skill {
+    display: block;
+    padding: 5px 5px;
+}
+.w-skill a{
+    padding: 0;
+    cursor: pointer;
+}
+.w-skill:hover {
+    background: #51a5fb;
+}
+.listski{
+    display: block;
+    position: relative;
+    box-shadow: 1px 1px 1px #CCC;
+}
+.w-skillch > input {
+    display: none;
+}
+.w-skillch {
+    padding: 5px 10px;
+    background: #51a5fb;
+    display: inline-block;
+    cursor: pointer;
+}
