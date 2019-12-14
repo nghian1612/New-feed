@@ -24,8 +24,9 @@ class Feeds extends Migration
             $table->text('link_project')->nullable();
             $table->text('description')->nullable();
             $table->double('type_feed');
-            $table->date('time_on')->nullable();;
-            $table->date('time_off')->nullable();;
+            $table->double('status');
+            $table->date('time_on')->nullable();
+            $table->date('time_off')->nullable();
             $table->bigInteger('id_user')->unsigned();
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();

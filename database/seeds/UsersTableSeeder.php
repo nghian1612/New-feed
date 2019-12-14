@@ -233,6 +233,19 @@ class UsersTableSeeder extends Seeder
                 'estalish' => null,
                 'title' => 'Front-end master'
             ],
+            [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => bcrypt('phaitotnghiep'),
+                'about_yourself' => null,
+                'location' => null,
+                'avatar' => 'cover-img.jpg',
+                'background' => null,
+                'type_user' => '3',
+                'gender' => null,
+                'estalish' => null,
+                'title' => null
+            ],
         ]);
     }
 }

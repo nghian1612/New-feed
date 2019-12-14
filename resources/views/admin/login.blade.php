@@ -79,14 +79,14 @@
                             <div class="form-group">
                             <input type="hidden" value="{{csrf_token()}}" name="_token">
                                 <label class="control-label" for="username">Username</label>
-                                <input type="text" placeholder="example@gmail.com" title="Please enter you username"  name="email" id="email" class="form-control">
+                                <input type="text" placeholder="example@gmail.com" title="Please enter you username"  name="name" id="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="password">Password</label>
                                 <input type="password" title="Please enter your password" placeholder="******"  name="password" id="password" class="form-control">
                             </div>
                             <div class="checkbox login-checkbox">
-                                                    @if(count($errors) > 0)
+                          @if(count($errors) > 0)
 													<div class=" alert alert-danger">
 													@foreach($errors->all() as $err)
 														{{$err}}<br>
@@ -168,7 +168,6 @@
     <script src="admin/js/main.js"></script>
     <!-- tawk chat JS
 		============================================ -->
-    <script src="admin/js/tawk-chat.js"></script>
 </body>
 
 </html>
