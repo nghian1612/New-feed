@@ -22,10 +22,24 @@ use App\Comments;
 
 class adminUserController extends Controller
 {
-    public function getAdminUser(){
-        $profiles = User::all();
+    public function getUserManager(){
+        $profiles = User::where('type_user','1')->get();
         return view('admin.usermanager',['profiles'=>$profiles]);
     }
+    public function getCompanyManager(){
+        $profiles = User::where('type_user','2')->get();
+        return view('admin.companymanager',['profiles'=>$profiles]);
+    }
+    public function getJobManager(){
+        $feeds = Feeds::where('type_feed','1')->get();
+        return view('admin.jobmanager',['feeds'=>$feeds]);
+    }
+    public function getNormalManager(){
+        $feeds = Feeds::where('type_feed','2')->get();
+        return view('admin.normalmanager',['feeds'=>$feeds]);
+    }
+    
+
 
     public function getDetailUser(){
         return view('admin.information');

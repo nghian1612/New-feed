@@ -14,7 +14,7 @@ $(document).ready(function(){
         $(".wrapper").addClass("overlay");
         let idUser = $('#idUser').val();
         $.ajax({
-            url:"/client/postAbout/" +idUser,
+            url:"client/postAbout/" +idUser,
             method: "get",
         }).done(function(data){
             ckAbout.setData(data);
@@ -98,7 +98,7 @@ $(document).ready(function(){
         let id = $('#experienceIdEdit').val();
         console.log(subject,detail);
         $.ajax({
-            url:"/client/updateexp",
+            url:"client/updateexp",
             method: "post",
             data: {
                 id :id,
