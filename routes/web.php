@@ -16,8 +16,8 @@ Route::get('back/logout','adminLoginController@getlogoutAdmin');
 Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
     Route::get('usermanager','adminUserController@getUserManager')->name('usermanager');
     Route::get('companymanager','adminUserController@getCompanyManager')->name('companymanager');
-    Route::get('jobmanager','adminUserController@getJobManager');
-    Route::get('normalmanager','adminUserController@getNormalManager');
+    Route::get('jobmanager','adminPostController@getJobManager');
+    Route::get('normalmanager','adminPostController@getNormalManager');
     Route::get('detailuser/info','adminUserController@getDetailUserInfo');
     Route::get('detailuser/post','adminUserController@getDetailUserPost');
     Route::get('detailuser/extanallink','adminUserController@getDetailUserExtanallink');
