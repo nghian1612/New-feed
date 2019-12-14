@@ -90,7 +90,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="view-more">
-										<a href="#" title="">View More</a>
+										<a href="#" title="">Chi tiết</a>
 									</div>
 								</div><!--suggestions-list end-->
 							</div><!--suggestions end-->
@@ -229,7 +229,8 @@
 															@endif
 															<li><span>{{$allf->salary}}đ / tháng</span></li>
 														</ul>
-														<p>{!!$allf->description!!}<br><a href="/client/detailjob/{{$allf->id}}" title="">view more</a></p>
+														<p>{!!$allf->description!!}<br></p>
+														<a href="/client/detailjob/{{$allf->id}}" title="">Chi tiết</a>
 														<ul class="skill-tags">
 															@foreach($feedskill as $fskill)
 															@if($fskill->id_feed == $allf->id)
@@ -322,7 +323,8 @@
 													</div>
 													<div class="job_descp">
 														<h3>{{$allf->title}}</h3>
-														<p>{!!$allf->description!!}<br><a href="/client/detailpost/{{$allf->id}}" title="">view more</a></p>
+														<p>{!!$allf->description!!}<br></p>
+														<a href="/client/detailpost/{{$allf->id}}" title="">Chi tiết</a>
 														<ul class="skill-tags">
 															@foreach($feedskill as $fskill)
 															@if($fskill->id_feed == $allf->id)
@@ -430,7 +432,8 @@
 															@endif
 															<li><span>{{$allf->salary}}đ / tháng</span></li>
 														</ul>
-														<p>{!!$allf->description!!}<br><a href="/client/detailjob/{{$allf->id}}" title="">view more</a></p>
+														<p>{!!$allf->description!!}<br></p>
+														<a href="/client/detailjob/{{$allf->id}}" title="">Chi tiết</a>
 														<ul class="skill-tags">
 															@foreach($feedskill as $fskill)
 															@if($fskill->id_feed == $allf->id)
@@ -523,7 +526,8 @@
 													</div>
 													<div class="job_descp">
 														<h3>{{$allf->title}}</h3>
-														<p>{!!$allf->description!!}<br><a href="/client/detailpost/{{$allf->id}}" title="">view more</a></p>
+														<p>{!!$allf->description!!}<br></p>
+														<a href="/client/detailpost/{{$allf->id}}" title="">Chi tiết</a>
 														<ul class="skill-tags">
 															@foreach($feedskill as $fskill)
 															@if($fskill->id_feed == $allf->id)
@@ -762,7 +766,7 @@
 										<span><i class="la la-plus"></i></span>
 									</div>
 									<div class="view-more">
-										<a href="#" title="">View More</a>
+										<a href="#" title="">Chi tiết</a>
 									</div>
 								</div><!--suggestions-list end-->
 							</div>

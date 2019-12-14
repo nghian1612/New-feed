@@ -134,7 +134,8 @@
 													@endif
 													<li><span>{{$alljob->salary}}đ / giờ</span></li>
 												</ul>
-												<p>{!!$alljob->description!!}<a href="/client/detailjob/{{$alljob->id}}">chi tiết</a></p>
+												<p>{!!$alljob->description!!}</p>
+												<a href="/client/detailjob/{{$alljob->id}}">chi tiết</a>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $alljob->id)
@@ -172,13 +173,8 @@
 							<div class="col-lg-3">
 								<div class="right-sidebar">
 									<div class="widget widget-about">
-										<img src="images/wd-logo.png" alt="">
-										<h3>Track Time on Workwise</h3>
-										<span>Pay only for the Hours worked</span>
-										<div class="sign_link">
-											<h3><a href="sign-in.html" title="">Sign up</a></h3>
-											<a href="#" title="">Learn More</a>
-										</div>
+										<img src="images/quangcao.jpg" alt="">
+										
 									</div><!--widget-about end-->
 									<div class="widget widget-jobs">
 										<div class="sd-title">

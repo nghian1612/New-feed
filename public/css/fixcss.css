@@ -6,13 +6,10 @@
     padding: 0;
     cursor: pointer;
 }
-.w-skill:hover {
-    background: #51a5fb;
-}
+
 .listski{
     display: block;
     position: relative;
-    box-shadow: 1px 1px 1px #CCC;
 }
 .w-skillch > input {
     display: none;
@@ -22,4 +19,28 @@
     background: #51a5fb;
     display: inline-block;
     cursor: pointer;
+}
+.overview-open{
+    float: right;
+    clear: both;
+}
+.exp-bx-open-add{
+    float: right;
+    clear: both;
+}
+.infoExp-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.infoExp-title>h4{
+    margin-bottom: 0;
+}
+.infoExp-content{
+    margin-bottom: 1rem;
+}
+.user-profile-ov>a{
+        float: right;
+        clear: both;
 }

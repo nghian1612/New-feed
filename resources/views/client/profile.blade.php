@@ -343,41 +343,54 @@
 									<h3>KINH NGHIỆM <a  title="" class="exp-bx-open-add"><i class="fa fa-plus-square"></i></a></h3>
 									<div id="infoExp">
 										@foreach($experiences as $exp)
-										<h4>{{$exp->subject}}<button type="button" value="{{$exp->id}}" class="exp-bx-open"><i class='fa fa-pencil'></i></button><a href="/client/deleteexp/{{$exp->id}}">xoa</a></h4>
+										<div class="infoExp-title">
+											<h4>{{$exp->subject}}</h4>
+											<div class="infoExp-btn">
+												<button type="button" value="{{$exp->id}}" class="exp-bx-open" style="background: transparent;border: 0;"><i class='fa fa-pencil'></i></button>
+												<a href="/client/deleteexp/{{$exp->id}}"><i class="fas fa-trash-alt" ></i></a>
+											</div>
+										</div>
 										<input type="hidden" class="idexp"value="{{$exp->id}}">
-										<div>{!!$exp->detail!!} </div>
+										<div class="infoExp-content">{!!$exp->detail!!} </div>
 										@endforeach
 									</div>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
-									<h3>HỌC VẤN<a title="" class="edu-bx-open-add"><i class="fa fa-plus-square"></i></a></h3>
+									<h3>HỌC VẤN<a title="" class="edu-bx-open-add" style="float: right;clear: both;"><i class="fa fa-plus-square"></i></a></h3>
 									@foreach($educations as $edu)
 										@if($edu->graduated == 1)
 									<p>Tốt nghiệp</p>
 										@else
 									<p>Đang học tại</p>									
 										@endif
-									<h4>{{$edu->name_school}}<button value="{{$edu->id}}" title="" class="edu-bx-open"><i class="fa fa-pencil"></i></button><a href="/client/deleteedu/{{$edu->id}}">xoa</a></h4>
+										<div class="infoExp-title">
+											<h4>{{$edu->name_school}}</h4>
+											<div class="infoExp-btn">
+												<button type="button" value="{{$exp->id}}" class="exp-bx-open" style="background: transparent;border: 0;"><i class='fa fa-pencil'></i></button>
+													<a href="/client/deleteexp/{{$exp->id}}"><i class="fas fa-trash-alt" ></i></a>	
+												
+											</div>
+										</div>
 									<input type="hidden" class="idexp"value="{{$edu->id}}">
 									<span>Chuyên ngành {{$edu->career}}</span>
 									<p>	{!!$edu->description!!}</p>
 									@endforeach
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
-									<h3>KỸ NĂNG <a href="#" class="skills-open"><i class="fa fa-plus-square"></i></a></h3>
+									<h3>KỸ NĂNG <a href="#" class="skills-open" style="float: right;clear: both;"><i class="fa fa-plus-square"></i></a></h3>
 									<ul>
-									@if($userskill)
+									<!-- @if($userskill)
 									@foreach($userskill as $skill)
 										<li style='position:relative; padding-right:10px;'>
 											<a href="#" title="" style="">{{$skill->skill->name}}</a>
 											<a href="/client/deleteski/{{$skill->id}}" title="" style="position:absolute; right:0; top:-10px ;background:#bbb;padding:3px;border:1px solid #ccc; border-radius:50%"><i class="la la-close" style="padding-left:0px; font-size:14px;" ></i></a>
 										</li>
 									@endforeach
-									@endif
+									@endif -->
 									</ul>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
-									<h3>Liên hệ<a href="#" title="" class="lct-box-open"><i class="fa fa-pencil"></i></a></h3>
+									<h3>Liên hệ<a href="#" title="" class="lct-box-open" style="float: right;clear: both;"><i class="fa fa-pencil"></i></a></h3>
 									<!-- <h4>India</h4> -->
 									<p>{!!$pro->location!!} </p>
 								</div><!--user-profile-ov end-->
@@ -922,7 +935,7 @@
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
 									<h3>KỸ NĂNG</h3>
-									<ul>
+									<!-- <ul>
 									@if($userskill)
 									@foreach($userskill as $skill)
 										<li style='position:relative; padding-right:10px;'>
@@ -930,7 +943,7 @@
 										</li>
 									@endforeach
 									@endif
-									</ul>
+									</ul> -->
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
 									<h3>Liên hệ</h3>
