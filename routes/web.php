@@ -18,9 +18,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
     Route::get('companymanager','adminUserController@getCompanyManager')->name('companymanager');
     Route::get('jobmanager','adminPostController@getJobManager');
     Route::get('normalmanager','adminPostController@getNormalManager');
-    Route::get('detailuser/info','adminUserController@getDetailUserInfo');
-    Route::get('detailuser/post','adminUserController@getDetailUserPost');
-    Route::get('detailuser/extanallink','adminUserController@getDetailUserExtanallink');
 
     Route::get('jobmanager/hide/{id}','adminPostController@getJobManagerHide');
     Route::get('jobmanager/show/{id}','adminPostController@getJobManagerShow');
@@ -29,6 +26,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
     Route::get('normalmanager/hide/{id}','adminPostController@getNormalManagerHide');
     Route::get('normalmanager/show/{id}','adminPostController@getNormalManagerShow');
     Route::get('normalmanager/delete/{id}','adminPostController@getNormalManagerDelete');
+
+    Route::get('skillmanager','adminSkillController@getSkillManager');
+    Route::post('skillmanager/add','adminSkillController@getSkillManagerAdd');
+    Route::get('skillmanager/delete/{id}','adminSkillController@getSkillManagerDelete');
+    Route::get('skillmanager/edit/{id}','adminSkillController@getSkillManagerEdit');
+    Route::post('skillmanager/update','adminSkillController@getSkillManagerUpdate');
 });
 
 // Route::get('/', function () {
