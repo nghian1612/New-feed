@@ -923,11 +923,13 @@
 								<div class="user-profile-ov">
 									<h3>KỸ NĂNG</h3>
 									<ul>
+									@if($userskill)
 									@foreach($userskill as $skill)
 										<li style='position:relative; padding-right:10px;'>
 											<a href="#" title="" style="">{{$skill->skill->name}}</a>
 										</li>
 									@endforeach
+									@endif
 									</ul>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">
