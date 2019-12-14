@@ -368,6 +368,7 @@ public function updatestalish(Request $request){
             $location = $request->locationPostAdd;
             $skills= $request->grpskill;
             $salary= $request->salaryPostAdd;
+            $status= 1;
             $type_job= $request->typejobPostAdd;
             $description= $request->editorPostJobAdd;
             $time_on = date("Y-m-d", strtotime($request->timeonPostAdd));
@@ -383,6 +384,7 @@ public function updatestalish(Request $request){
             $add -> description = $description;
             $add -> time_on = $time_on;
             $add -> time_off = $time_off;
+            $add -> status =$status;
             $add -> save();
             $id_feed = $add->id;
             $all_skill = Skills::all();
@@ -409,11 +411,13 @@ public function updatestalish(Request $request){
                 $title = $request->title;
                 $skills= $request->grpskill;
                 $description= $request->description;
+                $status= 1;
                 $add = new Feeds;
                 $add -> id_user = $id_user;
                 $add -> type_feed = $type_feed;
                 $add -> title = $title;
                 $add -> image = $hinh;
+                $add -> status =$status;
                 $add -> description = $description;
                 $add -> save();
                 $id_feed = $add->id;
