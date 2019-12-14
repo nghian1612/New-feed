@@ -122,6 +122,7 @@
 									</div><!--post-topbar end-->
 								<div class="posts-section">
 								@foreach($myfeeds as $mfeed)
+									@if($mfeed->status == 1)
 									@if($mfeed->type_feed == 1)
 									<div class="posty mb-3">
 										<div class="post-bar no-margin">
@@ -323,6 +324,7 @@
 											</div><!--post-comment end-->
 										</div><!--comment-section end-->
 									</div>
+									@endif
 									@endif
 								@endforeach
 									<div class="process-comm">
@@ -697,6 +699,7 @@
 							<div class="product-feed-tab current" id="feed-dd">
 								<div class="posts-section">
 								@foreach($myfeeds as $mfeed)
+									@if($mfeed->status)
 									@if($mfeed->type_feed == 1)
 									<div class="posty mb-3">
 										<div class="post-bar no-margin">
@@ -898,6 +901,7 @@
 											</div><!--post-comment end-->
 										</div><!--comment-section end-->
 									</div>
+									@endif
 									@endif
 								@endforeach
 									<div class="process-comm">
