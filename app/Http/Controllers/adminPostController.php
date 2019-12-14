@@ -20,12 +20,12 @@ use App\Comments;
 class adminPostController extends Controller
 {
     public function getNormalManager(){
-        $feeds = Feeds::where('type_feed','1')->get();
+        $feeds = Feeds::where('type_feed','2')->get();
         return view('admin.normalmanager',['feeds'=>$feeds]);
     }
 
     public function getJobManager(){
-        $feeds = Feeds::where('type_feed','2')->get();
+        $feeds = Feeds::where('type_feed','1')->get();
         return view ('admin.jobmanager',['feeds'=>$feeds]);
     }
 }

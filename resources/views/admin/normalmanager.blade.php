@@ -21,14 +21,18 @@
                             <tr>
                                 <td>{{$loop->index+1}}</td>
                                 <td style="display:flex;">
-                                    <div style="width:25px;height:25px; border-radius:50%;"><img src="images/resources/{{$feed->user->avarter}}" alt="" /></div>
+                                    <div style="width:25px;height:25px; border-radius:50%;"><img src="images/resources/{{$feed->user->avatar}}" alt="" /></div>
                                     <p style="margin:0 0 0 5px;">{{$feed->user->name}}</p>
                                 </td>
-                                <td>Web Development Book</td>
+                                <td><a href="client/detailjob/{{$feed->id}}" target="_blank">{{$feed->title}}</a></td>
                                 <td>
-                                    <button class="pd-setting">Active</button>
+                                    @if($feed->status == 1)
+                                    <button class="pd-setting">Hiển thị</button>
+                                    @else 
+                                    <button class="pd-setting" style="background:#CCC">Ẩn</button>
+                                    @endif
                                 </td>
-                                <td>$1500</td>
+                                <td>{{$feed->created_at}}</td>
                                 <td>
                                     <a href="" class="pd-setting-ed">Ẩn</a>
                                     <a href="" class="pd-setting-ed">Xóa</a>
@@ -36,15 +40,6 @@
                             </tr>
                             @endforeach
                         </table>
-                    </div>
-                    <div class="custom-pagination">
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
