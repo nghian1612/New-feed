@@ -15,6 +15,10 @@ Route::post('back/login','adminLoginController@postloginAdmin');
 Route::get('back/logout','adminLoginController@getlogoutAdmin');
 Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
     Route::get('/usermanager','adminUserController@getAdminUser')->name('usermanager');
+    Route::get('/detailuser','adminUserController@getDetailUser');
+    Route::get('detailuser/info','adminUserController@getDetailUserInfo');
+    Route::get('detailuser/post','adminUserController@getDetailUserPost');
+    Route::get('detailuser/extanallink','adminUserController@getDetailUserExtanallink');
 });
 
 // Route::get('/', function () {

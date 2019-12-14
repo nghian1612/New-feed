@@ -366,12 +366,14 @@
 								<div class="user-profile-ov">
 									<h3>KỸ NĂNG <a href="#" class="skills-open"><i class="fa fa-plus-square"></i></a></h3>
 									<ul>
+									@if($userskill)
 									@foreach($userskill as $skill)
 										<li style='position:relative; padding-right:10px;'>
 											<a href="#" title="" style="">{{$skill->skill->name}}</a>
 											<a href="/client/deleteski/{{$skill->id}}" title="" style="position:absolute; right:0; top:-10px ;background:#bbb;padding:3px;border:1px solid #ccc; border-radius:50%"><i class="la la-close" style="padding-left:0px; font-size:14px;" ></i></a>
 										</li>
 									@endforeach
+									@endif
 									</ul>
 								</div><!--user-profile-ov end-->
 								<div class="user-profile-ov">

@@ -26,4 +26,17 @@ class adminUserController extends Controller
         $profiles = User::all();
         return view('admin.usermanager',['profiles'=>$profiles]);
     }
+
+    public function getDetailUser(){
+        return view('admin.information');
+    }
+    public function getDetailUserInfo(){
+        return view('admin.information');
+    }
+    public function getDetailUserPost(){
+        return view ('admin.post');
+    }
+    public function getDetailUserExtanallink(){
+        return view ('admin.extanallink');
+    }
 }

@@ -1,0 +1,17 @@
+.menu-detail-user{
+    display: flex;
+}
+.menu-detail-user li{
+    padding-right:15px;
+}
+.menu-detail-user .active a{
+    text-decoration: underline;
+}
+.menu-detail-user li:last-child {
+    padding-right:0 ;
+}
+.menu-detail-user li a{
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+}
