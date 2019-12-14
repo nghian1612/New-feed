@@ -31,7 +31,7 @@
 										<span>{{$countFollowed}}</span>
 									</li>
 									<li>
-										<a href="client/profile/{{$pro->id}}" title="">View Profile</a>
+										<a href="client/profile/{{$pro->id}}" title="">Trang Cá Nhân</a>
 									</li>
 								</ul>
 							</div><!--user-data end-->
@@ -130,7 +130,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 										<div class="user-profy">
 											<img src="images/resources/user2.png" alt="">
@@ -141,7 +141,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 										<div class="user-profy">
 											<img src="images/resources/user3.png" alt="">
@@ -152,7 +152,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 										<div class="user-profy">
 											<img src="images/resources/user1.png" alt="">
@@ -163,7 +163,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 										<div class="user-profy">
 											<img src="images/resources/user2.png" alt="">
@@ -174,7 +174,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 										<div class="user-profy">
 											<img src="images/resources/user3.png" alt="">
@@ -185,7 +185,7 @@
 												<li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
 												<li><a href="#" title="" class="hire">hire</a></li>
 											</ul>
-											<a href="#" title="">View Profile</a>
+											<a href="#" title="">Trang Cá Nhân</a>
 										</div><!--user-profy end-->
 									</div><!--profiles-slider end-->
 								</div><!--top-profiles end-->
@@ -615,13 +615,8 @@
 					<div class="col-lg-3 pd-right-none no-pd">
 						<div class="right-sidebar">
 							<div class="widget widget-about">
-								<img src="images/wd-logo.png" alt="">
-								<h3>Track Time on Workwise</h3>
-								<span>Pay only for the Hours worked</span>
-								<div class="sign_link">
-									<h3><a href="sign-in.html" title="">Sign up</a></h3>
-									<a href="#" title="">Learn More</a>
-								</div>
+								<img src="images/quangcao.jpg" alt="">
+								
 							</div><!--widget-about end-->
 							<div class="widget widget-jobs">
 								<div class="sd-title">

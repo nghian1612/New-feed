@@ -95,7 +95,7 @@
 									<div class="posts-section">
 									@if($alljob)
 										@foreach($alljob as $alljob)
-										<div class="post-bar">
+										<div class="post-bar posty">
 											<div class="post_topbar">
 												<div class="usy-dt">
 													<img src="images/resources/{{$alljob->user->avatar}}">

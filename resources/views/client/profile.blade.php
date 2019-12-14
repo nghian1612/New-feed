@@ -72,7 +72,7 @@
 									</div>
 								@endforeach
 									<!-- <div class="view-more">
-										<a href="#" title="">View More</a>
+										<a href="#" title="">Chi Tiết</a>
 									</div> -->
 								</div><!--suggestions-list end-->
 							</div><!--suggestions end-->
@@ -159,7 +159,8 @@
 													@endif
 													<li><span>{{$mfeed->salary}}đ / tháng</span></li>
 												</ul>
-												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<p>{!!$mfeed->description!!}<br></p>
+												<a href="/client/detailjob/{{$mfeed->id}}" title="">Chi Tiết</a>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $mfeed->id)
@@ -252,7 +253,8 @@
 											</div>
 											<div class="job_descp">
 												<h3>{{$mfeed->title}}</h3>
-												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<p>{!!$mfeed->description!!}<br></p>
+												<a href="/client/detailjob/{{$mfeed->id}}" title="">Chi Tiết</a>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $mfeed->id)
@@ -657,7 +659,7 @@
 									</div>
 								@endforeach
 									<!-- <div class="view-more">
-										<a href="#" title="">View More</a>
+										<a href="#" title="">Chi Tiết</a>
 									</div> -->
 								</div><!--suggestions-list end-->
 							</div><!--suggestions end-->
@@ -732,7 +734,8 @@
 													@endif
 													<li><span>{{$mfeed->salary}}đ / tháng</span></li>
 												</ul>
-												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<p>{!!$mfeed->description!!}<br></p>
+												<a href="/client/detailjob/{{$mfeed->id}}" title="">Chi Tiết</a>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $mfeed->id)
@@ -825,7 +828,8 @@
 											</div>
 											<div class="job_descp">
 												<h3>{{$mfeed->title}}</h3>
-												<p>{!!$mfeed->description!!}<br><a href="#" title="">view more</a></p>
+												<p>{!!$mfeed->description!!}<br></p>
+												<a href="/client/detailjob/{{$mfeed->id}}" title="">Chi Tiết</a>
 												<ul class="skill-tags">
 													@foreach($feedskill as $fskill)
 													@if($fskill->id_feed == $mfeed->id)
