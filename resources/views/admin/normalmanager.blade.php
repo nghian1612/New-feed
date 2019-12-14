@@ -34,8 +34,12 @@
                                 </td>
                                 <td>{{$feed->created_at}}</td>
                                 <td>
-                                    <a href="" class="pd-setting-ed">Ẩn</a>
-                                    <a href="" class="pd-setting-ed">Xóa</a>
+                                    @if($feed->status == 1)
+                                    <a href="admin/normalmanager/hide/{{$feed->id}}" class="pd-setting-ed">Ẩn</a>
+                                    @else
+                                    <a href="admin/normalmanager/show/{{$feed->id}}" class="pd-setting-ed">Hiện</a>
+                                    @endif
+                                    <a href="admin/normalmanager/delete/{{$feed->id}}" class="pd-setting-ed">Xóa</a>
                                 </td>
                             </tr>
                             @endforeach

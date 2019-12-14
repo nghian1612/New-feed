@@ -21,6 +21,14 @@ Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
     Route::get('detailuser/info','adminUserController@getDetailUserInfo');
     Route::get('detailuser/post','adminUserController@getDetailUserPost');
     Route::get('detailuser/extanallink','adminUserController@getDetailUserExtanallink');
+
+    Route::get('jobmanager/hide/{id}','adminPostController@getJobManagerHide');
+    Route::get('jobmanager/show/{id}','adminPostController@getJobManagerShow');
+    Route::get('jobmanager/delete/{id}','adminPostController@getJobManagerDelete');
+
+    Route::get('normalmanager/hide/{id}','adminPostController@getNormalManagerHide');
+    Route::get('normalmanager/show/{id}','adminPostController@getNormalManagerShow');
+    Route::get('normalmanager/delete/{id}','adminPostController@getNormalManagerDelete');
 });
 
 // Route::get('/', function () {
