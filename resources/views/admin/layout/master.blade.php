@@ -643,7 +643,7 @@
     <script src="admin/js/main.js"></script>
     <!-- tawk chat JS
 		============================================ -->
-    <script src="admin/js/tawk-chat.js"></script>
+  
 </body>
 
 </html>

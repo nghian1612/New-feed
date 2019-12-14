@@ -616,9 +616,9 @@
 								<div class="user_pro_status">
 									<ul class="flw-hr">
 										@if(empty($checkFollow))
-											<li><a href="/client/followon/{{$pro->id}}" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
+											<li><a href="client/followon/{{$pro->id}}" title="" class="flww"><i class="la la-plus"></i> Follow</a></li>
 										@else
-											<li><a href="/client/followoff/{{$pro->id}}" title="" class="flww"><i class="la la-minus"></i> UnFollow</a></li>
+											<li><a href="client/followoff/{{$pro->id}}" title="" class="flww"><i class="la la-minus"></i> UnFollow</a></li>
 										@endif	
 									</ul>
 									<ul class="flw-status">

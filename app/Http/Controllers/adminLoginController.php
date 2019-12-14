@@ -20,16 +20,16 @@ class adminLoginController extends Controller
 
     public function postloginAdmin(Request $request){
         $this->validate($request,[
-            'email'=>'required',
+            'name'=>'required',
             'password'=>'required|min:3|max:32',
             ],
             [
-            'email.required' =>'Bạn chưa nhập Email',
+            'name.required' =>'Bạn chưa nhập tên tài khoản',
             'password.required'  =>'Bạn chưa nhập Pasword',
             'password.min' =>'Email hoặc Password không hợp lệ',
             'password.max' =>'Email hoặc Password không hợp lệ'
             ]);
-        if(Auth::attempt(['email'=>$request->email, 'password'=>$request->password, 'type_user' => '3'])){
+        if(Auth::attempt(['name'=>$request->name, 'password'=>$request->password, 'type_user' => '3'])){
             $user = Auth::user();
            
             return redirect()->route('usermanager');

@@ -14,11 +14,21 @@ Route::get('/back','adminLoginController@getloginAdmin');
 Route::post('back/login','adminLoginController@postloginAdmin');
 Route::get('back/logout','adminLoginController@getlogoutAdmin');
 Route::group(['prefix'=>'admin', 'middleware'=>'clientlogin'],function(){
-    Route::get('/usermanager','adminUserController@getAdminUser')->name('usermanager');
-    Route::get('/detailuser','adminUserController@getDetailUser');
+    Route::get('usermanager','adminUserController@getUserManager')->name('usermanager');
+    Route::get('companymanager','adminUserController@getCompanyManager')->name('companymanager');
+    Route::get('jobmanager','adminPostController@getJobManager');
+    Route::get('normalmanager','adminPostController@getNormalManager');
     Route::get('detailuser/info','adminUserController@getDetailUserInfo');
     Route::get('detailuser/post','adminUserController@getDetailUserPost');
     Route::get('detailuser/extanallink','adminUserController@getDetailUserExtanallink');
+
+    Route::get('jobmanager/hide/{id}','adminPostController@getJobManagerHide');
+    Route::get('jobmanager/show/{id}','adminPostController@getJobManagerShow');
+    Route::get('jobmanager/delete/{id}','adminPostController@getJobManagerDelete');
+
+    Route::get('normalmanager/hide/{id}','adminPostController@getNormalManagerHide');
+    Route::get('normalmanager/show/{id}','adminPostController@getNormalManagerShow');
+    Route::get('normalmanager/delete/{id}','adminPostController@getNormalManagerDelete');
 });
 
 // Route::get('/', function () {
